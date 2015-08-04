@@ -11,7 +11,6 @@
 		D31DCB271B70444A006DA60A /* NewMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D31DCB261B70444A006DA60A /* NewMessageViewController.m */; };
 		D3565DB01B6FD07A008F62C0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D3565DAF1B6FD07A008F62C0 /* main.m */; };
 		D3565DB31B6FD07A008F62C0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D3565DB21B6FD07A008F62C0 /* AppDelegate.m */; };
-		D3565DB61B6FD07A008F62C0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3565DB51B6FD07A008F62C0 /* ViewController.m */; };
 		D3565DBB1B6FD07A008F62C0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3565DBA1B6FD07A008F62C0 /* Images.xcassets */; };
 		D3565DBE1B6FD07A008F62C0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3565DBC1B6FD07A008F62C0 /* LaunchScreen.xib */; };
 		D3565DCA1B6FD07A008F62C0 /* BRFChatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D3565DC91B6FD07A008F62C0 /* BRFChatTests.m */; };
@@ -52,8 +51,6 @@
 		D3565DAF1B6FD07A008F62C0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D3565DB11B6FD07A008F62C0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D3565DB21B6FD07A008F62C0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		D3565DB41B6FD07A008F62C0 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		D3565DB51B6FD07A008F62C0 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		D3565DBA1B6FD07A008F62C0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D3565DBD1B6FD07A008F62C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		D3565DC31B6FD07A008F62C0 /* BRFChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BRFChatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -124,6 +121,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D34EEFD21B711E6A00D65A65 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D3F8FA6F1B7030A9002C9D17 /* Conversation.h */,
+				D3F8FA701B7030A9002C9D17 /* Conversation.m */,
+				D3F8FA711B7030A9002C9D17 /* ChatMessage.h */,
+				D3F8FA721B7030A9002C9D17 /* ChatMessage.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		D3565DA11B6FD07A008F62C0 = {
 			isa = PBXGroup;
 			children = (
@@ -147,19 +155,12 @@
 		D3565DAC1B6FD07A008F62C0 /* BRFChat */ = {
 			isa = PBXGroup;
 			children = (
-				D3F8FA6F1B7030A9002C9D17 /* Conversation.h */,
-				D3F8FA701B7030A9002C9D17 /* Conversation.m */,
-				D3F8FA711B7030A9002C9D17 /* ChatMessage.h */,
-				D3F8FA721B7030A9002C9D17 /* ChatMessage.m */,
+				D34EEFD21B711E6A00D65A65 /* Models */,
 				D3565DE11B6FD0D6008F62C0 /* UI */,
 				D3565DD61B6FD0AB008F62C0 /* Client */,
 				D3565DB11B6FD07A008F62C0 /* AppDelegate.h */,
 				D3565DB21B6FD07A008F62C0 /* AppDelegate.m */,
-				D3565DB41B6FD07A008F62C0 /* ViewController.h */,
-				D3565DB51B6FD07A008F62C0 /* ViewController.m */,
 				D3565DF11B6FD0F9008F62C0 /* Chat.storyboard */,
-				D31DCB251B70444A006DA60A /* NewMessageViewController.h */,
-				D31DCB261B70444A006DA60A /* NewMessageViewController.m */,
 				D3565DF31B6FD104008F62C0 /* avatar_placeholder@2x.png */,
 				D3565DBA1B6FD07A008F62C0 /* Images.xcassets */,
 				D3565DBC1B6FD07A008F62C0 /* LaunchScreen.xib */,
@@ -212,6 +213,8 @@
 		D3565DE11B6FD0D6008F62C0 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				D31DCB251B70444A006DA60A /* NewMessageViewController.h */,
+				D31DCB261B70444A006DA60A /* NewMessageViewController.m */,
 				D3565DE21B6FD0E7008F62C0 /* ConversationTheirTableViewCell.h */,
 				D3565DE31B6FD0E7008F62C0 /* ConversationTheirTableViewCell.m */,
 				D3565DE41B6FD0E7008F62C0 /* ConversationsMyTableViewCell.h */,
@@ -379,7 +382,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3565DB61B6FD07A008F62C0 /* ViewController.m in Sources */,
 				D3565DF01B6FD0E7008F62C0 /* MessagesViewController.m in Sources */,
 				D3565DEC1B6FD0E7008F62C0 /* ConversationTheirTableViewCell.m in Sources */,
 				D3F8FA731B7030A9002C9D17 /* Conversation.m in Sources */,
