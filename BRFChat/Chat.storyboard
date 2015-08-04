@@ -399,6 +399,9 @@
                     <navigationItem key="navigationItem" id="5wu-ee-Cnd"/>
                     <connections>
                         <outlet property="bottomConstraint" destination="6nT-zh-HKB" id="faR-qd-xAi"/>
+                        <outlet property="messageAddressTextField" destination="aRB-K5-hSE" id="wWH-J0-nge"/>
+                        <outlet property="messageTextView" destination="Qz0-Wz-QMd" id="7E1-dS-ssb"/>
+                        <outlet property="sendButton" destination="3P6-Ox-qR4" id="qnt-dI-gcZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bZO-Fm-JQP" userLabel="First Responder" sceneMemberID="firstResponder"/>

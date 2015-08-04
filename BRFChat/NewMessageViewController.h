@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NewMessageViewController : UIViewController
+@interface NewMessageViewController : UIViewController <UITextFieldDelegate,UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstraint;
 
 @end

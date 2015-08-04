@@ -129,7 +129,7 @@ CGFloat kbHeight = 0.0;
 
 - (void)handleMessage:(PNMessageResult *)message
 {
-    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    NSManagedObjectContext *context = [appDelegate.coreData managedObjectContext];
 
     ChatMessage *chatMsg = [NSEntityDescription
                                 insertNewObjectForEntityForName:@"ChatMessage"
