@@ -46,6 +46,13 @@ CGFloat kbHeight = 0.0;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+/*
+    // Add a "new messages" button
+    UIButton *newMessageButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
+    [newMessageButton addTarget:self action:@selector(showInfo:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:newMessageButton];
+    self.navigationItem.rightBarButtonItem = rightBarButtonItem;
+ */   
     [self registerForKeyboardNotifications];
     [self initChat];
 
@@ -159,9 +166,6 @@ CGFloat kbHeight = 0.0;
         return [first compare:second];
     }];
     
-    
-    
-    
     ChatMessage *message = sortedArray[indexPath.row];
     BOOL mine = [message.channel isEqualToString:@"ID_0"];
     
@@ -221,7 +225,6 @@ CGFloat kbHeight = 0.0;
         [cell.timestampLabel sizeToFit];
         return cell;
     }
-    
 }
 
 #pragma mark - UITableViewDelegate
@@ -239,9 +242,6 @@ CGFloat kbHeight = 0.0;
         NSDate *second = [(ChatMessage *)b timestamp];
         return [first compare:second];
     }];
-    
-    
-    
     
     ChatMessage *message = sortedArray[indexPath.row];
 

@@ -8,10 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		7CA193730771E855832591E9 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4427F8E99E852AF00C9EE9 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		D31DCB271B70444A006DA60A /* NewMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D31DCB261B70444A006DA60A /* NewMessageViewController.m */; };
 		D3565DB01B6FD07A008F62C0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D3565DAF1B6FD07A008F62C0 /* main.m */; };
 		D3565DB31B6FD07A008F62C0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D3565DB21B6FD07A008F62C0 /* AppDelegate.m */; };
 		D3565DB61B6FD07A008F62C0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3565DB51B6FD07A008F62C0 /* ViewController.m */; };
-		D3565DB91B6FD07A008F62C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3565DB71B6FD07A008F62C0 /* Main.storyboard */; };
 		D3565DBB1B6FD07A008F62C0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3565DBA1B6FD07A008F62C0 /* Images.xcassets */; };
 		D3565DBE1B6FD07A008F62C0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3565DBC1B6FD07A008F62C0 /* LaunchScreen.xib */; };
 		D3565DCA1B6FD07A008F62C0 /* BRFChatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D3565DC91B6FD07A008F62C0 /* BRFChatTests.m */; };
@@ -45,6 +45,8 @@
 		967F3FA1D5126BB975F6417E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		CD4427F8E99E852AF00C9EE9 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1AFC730FF1F6C105634876C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		D31DCB251B70444A006DA60A /* NewMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMessageViewController.h; sourceTree = "<group>"; };
+		D31DCB261B70444A006DA60A /* NewMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMessageViewController.m; sourceTree = "<group>"; };
 		D3565DAA1B6FD07A008F62C0 /* BRFChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BRFChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3565DAE1B6FD07A008F62C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D3565DAF1B6FD07A008F62C0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -52,7 +54,6 @@
 		D3565DB21B6FD07A008F62C0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		D3565DB41B6FD07A008F62C0 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		D3565DB51B6FD07A008F62C0 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		D3565DB81B6FD07A008F62C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D3565DBA1B6FD07A008F62C0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D3565DBD1B6FD07A008F62C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		D3565DC31B6FD07A008F62C0 /* BRFChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BRFChatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -157,7 +158,8 @@
 				D3565DB41B6FD07A008F62C0 /* ViewController.h */,
 				D3565DB51B6FD07A008F62C0 /* ViewController.m */,
 				D3565DF11B6FD0F9008F62C0 /* Chat.storyboard */,
-				D3565DB71B6FD07A008F62C0 /* Main.storyboard */,
+				D31DCB251B70444A006DA60A /* NewMessageViewController.h */,
+				D31DCB261B70444A006DA60A /* NewMessageViewController.m */,
 				D3565DF31B6FD104008F62C0 /* avatar_placeholder@2x.png */,
 				D3565DBA1B6FD07A008F62C0 /* Images.xcassets */,
 				D3565DBC1B6FD07A008F62C0 /* LaunchScreen.xib */,
@@ -308,7 +310,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3565DB91B6FD07A008F62C0 /* Main.storyboard in Resources */,
 				D3565DF41B6FD104008F62C0 /* avatar_placeholder@2x.png in Resources */,
 				D3565DBE1B6FD07A008F62C0 /* LaunchScreen.xib in Resources */,
 				D3565DF21B6FD0F9008F62C0 /* Chat.storyboard in Resources */,
@@ -384,6 +385,7 @@
 				D3F8FA731B7030A9002C9D17 /* Conversation.m in Sources */,
 				D3565DB31B6FD07A008F62C0 /* AppDelegate.m in Sources */,
 				D3565DEF1B6FD0E7008F62C0 /* MessagesTableViewCell.m in Sources */,
+				D31DCB271B70444A006DA60A /* NewMessageViewController.m in Sources */,
 				D3565DE01B6FD0D0008F62C0 /* BRDateHelper.m in Sources */,
 				D3565DEE1B6FD0E7008F62C0 /* ConversationsViewController.m in Sources */,
 				D3565DD51B6FD097008F62C0 /* AppDelegate+BRChat.m in Sources */,
@@ -414,14 +416,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		D3565DB71B6FD07A008F62C0 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D3565DB81B6FD07A008F62C0 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		D3565DBC1B6FD07A008F62C0 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (

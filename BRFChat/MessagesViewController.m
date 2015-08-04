@@ -84,17 +84,18 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
 #pragma mark - Navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+ {
+     if ([[segue identifier] isEqualToString:@"conversationSegue"]) {
+         ConversationsViewController* viewController = [segue destinationViewController];
+         viewController.conversation = [_conversationList objectAtIndex:[self.tableView indexPathForSelectedRow].row];
+         viewController.msgChannel = @"my_channel";      //TEMP: We'll get this from the message that we clicked on to open the conversations view
+     }
+ }
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
-
+#pragma mark - TEMPORARY!!! Fake some messages and conversations
 - (ChatMessage *)fakeSomeMessageFrom:(NSString *)author onChannel:(NSString *)channel text:(NSString *)text
 {
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
@@ -170,14 +171,6 @@
     return cell;
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([[segue identifier] isEqualToString:@"conversationSegue"]) {
-        ConversationsViewController* viewController = [segue destinationViewController];
-        viewController.conversation = [_conversationList objectAtIndex:[self.tableView indexPathForSelectedRow].row];
-        viewController.msgChannel = @"my_channel";      //TEMP: We'll get this from the message that we clicked on to open the conversations view
-    }
-}
 
 
 #pragma mark - UITableViewDelegate
