@@ -14,19 +14,22 @@
 @property (weak, nonatomic) IBOutlet UITextView *messageTextView;
 @property (weak, nonatomic) IBOutlet UITextField *messageAddressTextField;
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
+@property (weak, nonatomic) IBOutlet UITableView *addrTable;
 
 @end
 
 @implementation NewMessageViewController
 
-UITableView *addrTable;
+NSInteger tableRows = 0;
+NSMutableArray *contactNames;
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self registerForNotifications];
-//    [_messageAddressTextField becomeFirstResponder];
-    
+    contactNames = [[NSMutableArray alloc] initWithCapacity:0];
+    _addrTable.hidden = YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -79,10 +82,10 @@ UITableView *addrTable;
 {
     NSString *text = [(UITextField *)notif.object text];
     
-    _messageTextView.text = [self lookUpInAddressBook:text];
+    [self lookUpInAddressBook:text];
 }
 
-- (NSString *)lookUpInAddressBook:(NSString *)text
+- (void)lookUpInAddressBook:(NSString *)text
 {
     
     NSArray *allContacts = [appDelegate.addrBook.contacts allObjects];
@@ -96,13 +99,34 @@ UITableView *addrTable;
         return [first compare:second];
     }];
     
-    NSMutableString *contactsText = [NSMutableString stringWithCapacity:0];
+    [contactNames removeAllObjects];
+    tableRows = [sortedArray count];
+
     for (Contact *c in sortedArray) {
-        [contactsText appendString:c.displayName];
-        [contactsText appendString:@"\n"];
+        [contactNames addObject:c.displayName];
     }
-    return contactsText;
+    _addrTable.hidden = NO;
+    [_addrTable reloadData];
 }
 
+#pragma - TableViewDataSource
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellIdentifier = @"newMessageAddrCell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault  reuseIdentifier:cellIdentifier];
+    }
+    
+    cell.textLabel.text = [contactNames objectAtIndex:indexPath.row];
+    return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return tableRows;
+}
 
 @end

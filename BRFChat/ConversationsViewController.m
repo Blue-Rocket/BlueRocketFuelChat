@@ -46,18 +46,9 @@ CGFloat kbHeight = 0.0;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-/*
-    // Add a "new messages" button
-    UIButton *newMessageButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
-    [newMessageButton addTarget:self action:@selector(showInfo:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:newMessageButton];
-    self.navigationItem.rightBarButtonItem = rightBarButtonItem;
- */   
+
     [self registerForKeyboardNotifications];
     [self initChat];
-
-    [_conversationTextField becomeFirstResponder];  // Show keyboard
-
 }
 
 - (void)didReceiveMemoryWarning {
@@ -276,9 +267,9 @@ CGFloat kbHeight = 0.0;
                                              selector:@selector(keyboardWillShow:)
                                                  name:UIKeyboardDidShowNotification object:nil];
     
- //   [[NSNotificationCenter defaultCenter] addObserver:self
-  //                                           selector:@selector(keyboardWillBeHidden:)
-  //                                               name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
     
 }
 
@@ -342,5 +333,11 @@ CGFloat kbHeight = 0.0;
     NSLog(@"HEIGHT: %f", kbHeight);
 }
 
+- (void)keyboardWillBeHidden:(NSNotification *)notif
+{
+    kbHeight = [[[notif userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
+    [self updateKeyboardConstraint:10 animationDuration:0.25];
+    [_conversationTextField resignFirstResponder];
+}
 
 @end

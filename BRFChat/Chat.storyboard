@@ -348,7 +348,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qz0-Wz-QMd">
-                                <rect key="frame" x="33" y="182" width="534" height="211"/>
+                                <rect key="frame" x="33" y="182" width="534" height="237"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" priority="25" constant="211" id="fxv-ZL-5k7"/>
@@ -357,6 +357,17 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <tableView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="fTz-Bc-dTe" userLabel="AddrTableView">
+                                <rect key="frame" x="33" y="182" width="534" height="237"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" priority="25" constant="211" id="fj4-br-TUl"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="rEn-xd-OFj" id="G2h-DL-xsD"/>
+                                    <outlet property="delegate" destination="rEn-xd-OFj" id="EkI-Gg-i4r"/>
+                                </connections>
+                            </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3P6-Ox-qR4">
                                 <rect key="frame" x="499" y="401" width="36" height="30"/>
                                 <state key="normal" title="Send">
@@ -366,17 +377,25 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="fTz-Bc-dTe" firstAttribute="trailing" secondItem="Qz0-Wz-QMd" secondAttribute="trailing" id="0Sg-zm-5dI"/>
+                            <constraint firstItem="fTz-Bc-dTe" firstAttribute="bottom" secondItem="Qz0-Wz-QMd" secondAttribute="bottom" id="2vz-SX-ujN"/>
                             <constraint firstItem="Qz0-Wz-QMd" firstAttribute="top" secondItem="Wv9-ki-1lc" secondAttribute="bottom" constant="-1" id="3fQ-dy-G4a"/>
                             <constraint firstItem="LsD-8e-giE" firstAttribute="top" secondItem="3P6-Ox-qR4" secondAttribute="bottom" constant="169" id="6nT-zh-HKB"/>
                             <constraint firstItem="90b-uF-X5C" firstAttribute="top" secondItem="omk-tX-ap5" secondAttribute="bottom" constant="4" id="74V-Vw-gRc"/>
                             <constraint firstItem="90b-uF-X5C" firstAttribute="centerX" secondItem="ts2-lt-Fsq" secondAttribute="centerX" id="8r7-k4-Uh0"/>
                             <constraint firstItem="Wv9-ki-1lc" firstAttribute="width" secondItem="90b-uF-X5C" secondAttribute="width" id="DRR-nh-YaS"/>
+                            <constraint firstItem="fTz-Bc-dTe" firstAttribute="top" secondItem="Qz0-Wz-QMd" secondAttribute="top" id="DRu-QZ-Z39"/>
                             <constraint firstItem="Wv9-ki-1lc" firstAttribute="leading" secondItem="aRB-K5-hSE" secondAttribute="leading" id="GbC-39-3Ge"/>
                             <constraint firstAttribute="trailingMargin" secondItem="3P6-Ox-qR4" secondAttribute="trailing" constant="49" id="GgK-EC-Tfc"/>
                             <constraint firstItem="aRB-K5-hSE" firstAttribute="top" secondItem="90b-uF-X5C" secondAttribute="bottom" constant="35" id="J8t-Sn-Pcv"/>
+                            <constraint firstItem="fTz-Bc-dTe" firstAttribute="centerY" secondItem="Qz0-Wz-QMd" secondAttribute="centerY" id="JYU-9K-a6a"/>
+                            <constraint firstItem="fTz-Bc-dTe" firstAttribute="leading" secondItem="Qz0-Wz-QMd" secondAttribute="leading" id="KPS-4Y-D4z"/>
                             <constraint firstItem="Wv9-ki-1lc" firstAttribute="leading" secondItem="90b-uF-X5C" secondAttribute="leading" id="KUY-Ej-6UP"/>
                             <constraint firstItem="Wv9-ki-1lc" firstAttribute="top" secondItem="aRB-K5-hSE" secondAttribute="bottom" constant="8" id="Lgd-6j-5BS"/>
                             <constraint firstItem="Wv9-ki-1lc" firstAttribute="centerX" secondItem="Qz0-Wz-QMd" secondAttribute="centerX" id="Lon-d1-VSU"/>
+                            <constraint firstItem="fTz-Bc-dTe" firstAttribute="centerX" secondItem="Qz0-Wz-QMd" secondAttribute="centerX" id="LpZ-0X-mZe"/>
+                            <constraint firstItem="fTz-Bc-dTe" firstAttribute="trailing" secondItem="Qz0-Wz-QMd" secondAttribute="trailing" id="Mof-R7-wV4"/>
+                            <constraint firstItem="fTz-Bc-dTe" firstAttribute="centerY" secondItem="ts2-lt-Fsq" secondAttribute="centerY" id="Nwx-kL-1tw"/>
                             <constraint firstItem="Qz0-Wz-QMd" firstAttribute="leading" secondItem="ts2-lt-Fsq" secondAttribute="leadingMargin" constant="17" id="NzK-Xg-Glr"/>
                             <constraint firstAttribute="trailingMargin" secondItem="90b-uF-X5C" secondAttribute="trailing" constant="17" id="OHp-WK-ijD"/>
                             <constraint firstItem="90b-uF-X5C" firstAttribute="leading" secondItem="ts2-lt-Fsq" secondAttribute="leadingMargin" constant="17" id="Pjl-Qx-rw0"/>
@@ -384,8 +403,9 @@
                             <constraint firstItem="Wv9-ki-1lc" firstAttribute="leading" secondItem="90b-uF-X5C" secondAttribute="leading" id="QAP-N1-HEa"/>
                             <constraint firstItem="Wv9-ki-1lc" firstAttribute="leading" secondItem="Qz0-Wz-QMd" secondAttribute="leading" id="Uxk-gC-qcg"/>
                             <constraint firstItem="Wv9-ki-1lc" firstAttribute="centerX" secondItem="90b-uF-X5C" secondAttribute="centerX" id="Xd3-Mv-hip"/>
-                            <constraint firstItem="3P6-Ox-qR4" firstAttribute="top" secondItem="Qz0-Wz-QMd" secondAttribute="bottom" constant="8" id="Zfm-fO-1Zu"/>
+                            <constraint firstItem="3P6-Ox-qR4" firstAttribute="top" secondItem="Qz0-Wz-QMd" secondAttribute="bottom" constant="-18" id="Zfm-fO-1Zu"/>
                             <constraint firstItem="Wv9-ki-1lc" firstAttribute="width" secondItem="Qz0-Wz-QMd" secondAttribute="width" id="Zpx-aZ-hxI"/>
+                            <constraint firstItem="fTz-Bc-dTe" firstAttribute="leading" secondItem="Qz0-Wz-QMd" secondAttribute="leading" id="eR8-Ja-kfI"/>
                             <constraint firstItem="Wv9-ki-1lc" firstAttribute="trailing" secondItem="90b-uF-X5C" secondAttribute="trailing" id="h99-e7-H5b"/>
                             <constraint firstItem="Wv9-ki-1lc" firstAttribute="leading" secondItem="aRB-K5-hSE" secondAttribute="leading" id="jjf-cb-iUN"/>
                             <constraint firstItem="Wv9-ki-1lc" firstAttribute="trailing" secondItem="aRB-K5-hSE" secondAttribute="trailing" id="nEu-Nj-wE5"/>
@@ -398,6 +418,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="5wu-ee-Cnd"/>
                     <connections>
+                        <outlet property="addrTable" destination="fTz-Bc-dTe" id="0Ur-KC-aBk"/>
                         <outlet property="bottomConstraint" destination="6nT-zh-HKB" id="faR-qd-xAi"/>
                         <outlet property="messageAddressTextField" destination="aRB-K5-hSE" id="wWH-J0-nge"/>
                         <outlet property="messageTextView" destination="Qz0-Wz-QMd" id="7E1-dS-ssb"/>
