@@ -59,8 +59,8 @@ CGFloat kbHeight = 0.0;
 
 - (void)initChat
 {
-    _msgChannel = @"my_channel";    //TEMP: Get this from conversation
-    [appDelegate.chatClientController subscribeToChatChannel:_msgChannel];
+    _msgChannel = _conversation.channel;
+ //   [appDelegate.chatClientController subscribeToChatChannel:_msgChannel];
 }
 
 #pragma mark - PubNub Event Handlers
@@ -74,9 +74,7 @@ CGFloat kbHeight = 0.0;
 
 - (void)handleMessage:(PNMessageResult *)message
 {
-
     [self.tableView reloadData];
-    
     [self scrollToBottomOfTableView];
 }
 
@@ -105,7 +103,7 @@ CGFloat kbHeight = 0.0;
     ChatMessage *message;
     message = [self findMessageAtPath:indexPath];
     NSString *cellIdentifier = @"theirMessageCellIdentifier";
-    BOOL mine = [message.channel isEqualToString:@"ID_0"];
+    BOOL mine = [message.channel isEqualToString:@"999"];
     if (mine) {
         cellIdentifier = @"myMessageCellIdentifier";
     }

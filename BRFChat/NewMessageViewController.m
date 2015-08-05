@@ -145,7 +145,6 @@ NSString *msgChannel;
     // Add delete recipient button -------------
     
     // Get ChatId from contact
-//    Contact *c = [contactNames objectAtIndex:indexPath.row];
     msgChannel = c.chatId;
 
 }

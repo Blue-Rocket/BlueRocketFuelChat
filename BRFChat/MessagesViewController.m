@@ -56,6 +56,10 @@
     NSError *error;
     _conversationList = [NSMutableArray arrayWithArray:[context executeFetchRequest:fetchRequest error:&error]];
     
+    if ([_conversationList count] == 0) // Go to new messages view
+        [self performSegueWithIdentifier:@"newMessagesViewSegue" sender:self];
+    
+    
     for (Conversation *c in _conversationList) {
         NSLog(@"Conversation Messages: %lu", [c.messages count]);
     }
@@ -95,13 +99,14 @@
     return chatMsg;
 }
 
-- (Conversation *)fakeSomeConversation
+- (Conversation *)fakeSomeConversation:(Contact *)contact
 {
     NSManagedObjectContext *context = [appDelegate.coreData managedObjectContext];
     Conversation *conv = [NSEntityDescription
                             insertNewObjectForEntityForName:@"Conversation"
                             inManagedObjectContext:context];
-    [conv setValue:@"Brian" forKey:@"author"];
+    [conv setValue:contact.displayName forKey:@"author"];
+    [conv setValue:contact.chatId forKey:@"channel"];
     NSError *error;
     if (![context save:&error]) {
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
@@ -127,22 +132,70 @@
 
 - (void)fakeSomeData
 {
+    //TODO - temporary
+    // Populate the address book just once
+    if ([[appDelegate.addrBook.contacts allObjects] count] < 19) {
+        Contact *c = [self fakeSomeContactForName:@"Albert" withChatId:[NSString stringWithFormat:@"1000"]];
+        [appDelegate.addrBook addContactsObject:c];
+        c = [self fakeSomeContactForName:@"Alice" withChatId:[NSString stringWithFormat:@"1001"]];
+        [appDelegate.addrBook addContactsObject:c];
+        c = [self fakeSomeContactForName:@"Herbert" withChatId:[NSString stringWithFormat:@"1002"]];
+        [appDelegate.addrBook addContactsObject:c];
+        c = [self fakeSomeContactForName:@"Lawrence" withChatId:[NSString stringWithFormat:@"1003"]];
+        [appDelegate.addrBook addContactsObject:c];
+        c = [self fakeSomeContactForName:@"Judy" withChatId:[NSString stringWithFormat:@"1004"]];
+        [appDelegate.addrBook addContactsObject:c];
+        c = [self fakeSomeContactForName:@"Maria" withChatId:[NSString stringWithFormat:@"1005"]];
+        [appDelegate.addrBook addContactsObject:c];
+        c = [self fakeSomeContactForName:@"Donna" withChatId:[NSString stringWithFormat:@"1006"]];
+        [appDelegate.addrBook addContactsObject:c];
+        c = [self fakeSomeContactForName:@"David" withChatId:[NSString stringWithFormat:@"1007"]];
+        [appDelegate.addrBook addContactsObject:c];
+        c = [self fakeSomeContactForName:@"Zak" withChatId:[NSString stringWithFormat:@"1008"]];
+        [appDelegate.addrBook addContactsObject:c];
+        c = [self fakeSomeContactForName:@"Shawn" withChatId:[NSString stringWithFormat:@"1009"]];
+        [appDelegate.addrBook addContactsObject:c];
+        c = [self fakeSomeContactForName:@"Jess" withChatId:[NSString stringWithFormat:@"1010"]];
+        [appDelegate.addrBook addContactsObject:c];
+        c = [self fakeSomeContactForName:@"Estevan" withChatId:[NSString stringWithFormat:@"1011"]];
+        [appDelegate.addrBook addContactsObject:c];
+        c = [self fakeSomeContactForName:@"Brian" withChatId:[NSString stringWithFormat:@"1012"]];
+        [appDelegate.addrBook addContactsObject:c];
+        c = [self fakeSomeContactForName:@"Xavier" withChatId:[NSString stringWithFormat:@"1013"]];
+        [appDelegate.addrBook addContactsObject:c];
+        c = [self fakeSomeContactForName:@"Victor" withChatId:[NSString stringWithFormat:@"1014"]];
+        [appDelegate.addrBook addContactsObject:c];
+        c = [self fakeSomeContactForName:@"Cathy" withChatId:[NSString stringWithFormat:@"1015"]];
+        [appDelegate.addrBook addContactsObject:c];
+        c = [self fakeSomeContactForName:@"Kevin" withChatId:[NSString stringWithFormat:@"1016"]];
+        [appDelegate.addrBook addContactsObject:c];
+        c = [self fakeSomeContactForName:@"Kyle" withChatId:[NSString stringWithFormat:@"1017"]];
+        [appDelegate.addrBook addContactsObject:c];
+        c = [self fakeSomeContactForName:@"Randall" withChatId:[NSString stringWithFormat:@"1018"]];
+        [appDelegate.addrBook addContactsObject:c];
+        c = [self fakeSomeContactForName:@"Betsy" withChatId:[NSString stringWithFormat:@"1019"]];
+        [appDelegate.addrBook addContactsObject:c];
+        c = [self fakeSomeContactForName:@"Jeff" withChatId:[NSString stringWithFormat:@"1020"]];
+        [appDelegate.addrBook addContactsObject:c];
+    }
+    
+    return;
     /* TEMP: Add some test messages  *************************/
     NSMutableArray *conversations = [NSMutableArray arrayWithCapacity:0];
     
     for (int j=0;j<10;j++) {
-        int r = rand() % 25;
-        Conversation *cv = [self fakeSomeConversation];
+        int r = rand() % 19;
+        Contact *c = [[appDelegate.addrBook.contacts allObjects] objectAtIndex:r];
+        Conversation *cv = [self fakeSomeConversation:c];
         for (int i=0;i<r;i++) {
             
             NSString *msgText = [NSString stringWithFormat:@"This is the extra, extra, extra, extra, extra, extra, extra, extra, extra, extra, extra, extra, extra, extra, extra, extra, extra, extra, extra, extra long text of message %d.", i];
-            NSString *channel;
-            if ((i % 2) == 0)
-                channel = [NSString stringWithFormat:@"ID_%d",r];
-            else
-                channel = [NSString stringWithFormat:@"ID_0"];
-            
-            ChatMessage *cm = [self fakeSomeMessageFrom:@"Brian" onChannel:channel text:msgText];
+            ChatMessage *cm;
+            if ((i % 2) == 0) {
+                cm = [self fakeSomeMessageFrom:c.displayName onChannel:c.chatId text:msgText];
+            } else {
+                cm = [self fakeSomeMessageFrom:USERNAME onChannel:USER_ID text:msgText];
+            }
             
             [cv addMessagesObject:cm];
             [cv setValue:[NSDate date] forKey: @"timestamp"];   // Update the timestamp to be that of the latest message
@@ -150,52 +203,6 @@
         [conversations addObject:cv];
     }
     /***********************************/
-    // Populate the address book just once
-    if ([[appDelegate.addrBook.contacts allObjects] count] > 19)
-        return;
-    
-    Contact *c = [self fakeSomeContactForName:@"Albert" withChatId:[NSString stringWithFormat:@"1000"]];
-    [appDelegate.addrBook addContactsObject:c];
-    c = [self fakeSomeContactForName:@"Alice" withChatId:[NSString stringWithFormat:@"1001"]];
-    [appDelegate.addrBook addContactsObject:c];
-    c = [self fakeSomeContactForName:@"Herbert" withChatId:[NSString stringWithFormat:@"1002"]];
-    [appDelegate.addrBook addContactsObject:c];
-    c = [self fakeSomeContactForName:@"Lawrence" withChatId:[NSString stringWithFormat:@"1003"]];
-    [appDelegate.addrBook addContactsObject:c];
-    c = [self fakeSomeContactForName:@"Judy" withChatId:[NSString stringWithFormat:@"1004"]];
-    [appDelegate.addrBook addContactsObject:c];
-    c = [self fakeSomeContactForName:@"Maria" withChatId:[NSString stringWithFormat:@"1005"]];
-    [appDelegate.addrBook addContactsObject:c];
-    c = [self fakeSomeContactForName:@"Donna" withChatId:[NSString stringWithFormat:@"1006"]];
-    [appDelegate.addrBook addContactsObject:c];
-    c = [self fakeSomeContactForName:@"David" withChatId:[NSString stringWithFormat:@"1007"]];
-    [appDelegate.addrBook addContactsObject:c];
-    c = [self fakeSomeContactForName:@"Zak" withChatId:[NSString stringWithFormat:@"1008"]];
-    [appDelegate.addrBook addContactsObject:c];
-    c = [self fakeSomeContactForName:@"Shawn" withChatId:[NSString stringWithFormat:@"1009"]];
-    [appDelegate.addrBook addContactsObject:c];
-    c = [self fakeSomeContactForName:@"Jess" withChatId:[NSString stringWithFormat:@"1010"]];
-    [appDelegate.addrBook addContactsObject:c];
-    c = [self fakeSomeContactForName:@"Estevan" withChatId:[NSString stringWithFormat:@"1011"]];
-    [appDelegate.addrBook addContactsObject:c];
-    c = [self fakeSomeContactForName:@"Brian" withChatId:[NSString stringWithFormat:@"1012"]];
-    [appDelegate.addrBook addContactsObject:c];
-    c = [self fakeSomeContactForName:@"Xavier" withChatId:[NSString stringWithFormat:@"1013"]];
-    [appDelegate.addrBook addContactsObject:c];
-    c = [self fakeSomeContactForName:@"Victor" withChatId:[NSString stringWithFormat:@"1014"]];
-    [appDelegate.addrBook addContactsObject:c];
-    c = [self fakeSomeContactForName:@"Cathy" withChatId:[NSString stringWithFormat:@"1015"]];
-    [appDelegate.addrBook addContactsObject:c];
-    c = [self fakeSomeContactForName:@"Kevin" withChatId:[NSString stringWithFormat:@"1016"]];
-    [appDelegate.addrBook addContactsObject:c];
-    c = [self fakeSomeContactForName:@"Kyle" withChatId:[NSString stringWithFormat:@"1017"]];
-    [appDelegate.addrBook addContactsObject:c];
-    c = [self fakeSomeContactForName:@"Randall" withChatId:[NSString stringWithFormat:@"1018"]];
-    [appDelegate.addrBook addContactsObject:c];
-    c = [self fakeSomeContactForName:@"Betsy" withChatId:[NSString stringWithFormat:@"1019"]];
-    [appDelegate.addrBook addContactsObject:c];
-    c = [self fakeSomeContactForName:@"Jeff" withChatId:[NSString stringWithFormat:@"1020"]];
-    [appDelegate.addrBook addContactsObject:c];
 }
 
 

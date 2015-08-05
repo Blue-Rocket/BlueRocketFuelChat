@@ -170,9 +170,9 @@
     ChatMessage *chatMsg = [NSEntityDescription
                             insertNewObjectForEntityForName:@"ChatMessage"
                             inManagedObjectContext:context];
-    [chatMsg setValue:[self userForChatId:channel] forKey:@"author"];   // TEMP: me me me!!!
+    [chatMsg setValue:USERNAME forKey:@"author"];   // TODO: Get value from user object
     [chatMsg setValue:msg forKey:@"text"];
-    [chatMsg setValue:channel forKey:@"channel"];
+    [chatMsg setValue:USER_ID forKey:@"channel"];   // TODO: Get value from user object
     [chatMsg setValue:[NSDate date] forKey:@"timestamp"];
     NSError *error;
     if (![context save:&error]) {

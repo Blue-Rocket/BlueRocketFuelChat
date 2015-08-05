@@ -10,6 +10,11 @@
 
 #define appDelegate ((AppDelegate *)[[UIApplication sharedApplication] delegate])
 
+
+// TODO: TEMP - get info from user object
+#define USER_ID @"999"
+#define USERNAME @"Me"
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
