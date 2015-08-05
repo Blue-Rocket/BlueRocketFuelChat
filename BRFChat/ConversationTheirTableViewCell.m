@@ -35,5 +35,8 @@
 
     // Configure the view for the selected state
 }
-
+- (void)displayMessage:(ChatMessage *)msg {
+    self.messageLabel.backgroundColor = [UIColor grayColor];
+    [super displayMessage:msg];
+}
 @end

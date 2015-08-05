@@ -23,10 +23,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ConversationTableViewCell.h"
 
-@interface ConversationsMyTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
-@property (weak, nonatomic) IBOutlet UILabel *messageLabel;
-@property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
+@interface ConversationsMyTableViewCell : ConversationTableViewCell
 
 @end

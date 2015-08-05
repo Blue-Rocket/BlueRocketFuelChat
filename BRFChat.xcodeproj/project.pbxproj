@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		635D42731B71AEFC0042672E /* InsetLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 635D42721B71AEFC0042672E /* InsetLabel.m */; };
+		639028FB1B71C69900A5EDED /* ConversationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 639028FA1B71C69900A5EDED /* ConversationTableViewCell.m */; };
 		7CA193730771E855832591E9 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4427F8E99E852AF00C9EE9 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D307DD441B71415800FCFB06 /* AddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = D307DD411B71415800FCFB06 /* AddressBook.m */; };
 		D307DD451B71415800FCFB06 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = D307DD431B71415800FCFB06 /* Contact.m */; };
@@ -44,6 +46,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		635D42711B71AEFC0042672E /* InsetLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InsetLabel.h; sourceTree = "<group>"; };
+		635D42721B71AEFC0042672E /* InsetLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InsetLabel.m; sourceTree = "<group>"; };
+		639028F91B71C69900A5EDED /* ConversationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConversationTableViewCell.h; sourceTree = "<group>"; };
+		639028FA1B71C69900A5EDED /* ConversationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConversationTableViewCell.m; sourceTree = "<group>"; };
 		967F3FA1D5126BB975F6417E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		CD4427F8E99E852AF00C9EE9 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1AFC730FF1F6C105634876C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -228,6 +234,8 @@
 		D3565DE11B6FD0D6008F62C0 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				639028F91B71C69900A5EDED /* ConversationTableViewCell.h */,
+				639028FA1B71C69900A5EDED /* ConversationTableViewCell.m */,
 				D31DCB251B70444A006DA60A /* NewMessageViewController.h */,
 				D31DCB261B70444A006DA60A /* NewMessageViewController.m */,
 				D3565DE21B6FD0E7008F62C0 /* ConversationTheirTableViewCell.h */,
@@ -240,6 +248,8 @@
 				D3565DE91B6FD0E7008F62C0 /* MessagesTableViewCell.m */,
 				D3565DEA1B6FD0E7008F62C0 /* MessagesViewController.h */,
 				D3565DEB1B6FD0E7008F62C0 /* MessagesViewController.m */,
+				635D42711B71AEFC0042672E /* InsetLabel.h */,
+				635D42721B71AEFC0042672E /* InsetLabel.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -397,11 +407,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3565DB61B6FD07A008F62C0 /* ViewController.m in Sources */,
+				635D42731B71AEFC0042672E /* InsetLabel.m in Sources */,
 				D34EEFDB1B71336F00D65A65 /* Conversation.m in Sources */,
 				D307DD451B71415800FCFB06 /* Contact.m in Sources */,
 				D3565DF01B6FD0E7008F62C0 /* MessagesViewController.m in Sources */,
 				D3565DEC1B6FD0E7008F62C0 /* ConversationTheirTableViewCell.m in Sources */,
 				D3565DB31B6FD07A008F62C0 /* AppDelegate.m in Sources */,
+				639028FB1B71C69900A5EDED /* ConversationTableViewCell.m in Sources */,
 				D3565DEF1B6FD0E7008F62C0 /* MessagesTableViewCell.m in Sources */,
 				D31DCB271B70444A006DA60A /* NewMessageViewController.m in Sources */,
 				D3565DE01B6FD0D0008F62C0 /* BRDateHelper.m in Sources */,

@@ -28,6 +28,7 @@
 #import "ConversationsMyTableViewCell.h"
 #import "BRDateHelper.h"
 #import "ChatMessage.h"
+#import "InsetLabel.h"
 
 @interface ConversationsViewController ()
 - (IBAction)sendMessage:(id)sender;
@@ -147,9 +148,9 @@ CGFloat kbHeight = 0.0;
     return [_conversation.messages count];
 }
 
--(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (ChatMessage *)findMessageAtPath:(NSIndexPath *)indexPath
 {
-    
+    // TODO: abstract message retrieval into method for reuse
     NSArray *sortedArray;
     sortedArray = [_conversation.messages.allObjects sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
         NSDate *first = [(ChatMessage *)a timestamp];
@@ -158,64 +159,22 @@ CGFloat kbHeight = 0.0;
     }];
     
     ChatMessage *message = sortedArray[indexPath.row];
-    BOOL mine = [message.channel isEqualToString:@"ID_0"];
-    
-    if (!mine) {
-        static NSString *cellIdentifier = @"theirMessageCellIdentifier";
-        
+    return message;
+}
 
-        ConversationTheirTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-        if (cell == nil) {
-            cell = [[ConversationTheirTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault  reuseIdentifier:cellIdentifier];
-        }
-        
-        
-        UIFont *font = [UIFont fontWithName:@"HelveticaNeue" size:10]; //custom font
-        NSString *text = message.text;
-        
-        cell.messageLabel.backgroundColor = [UIColor grayColor];
-        
-        cell.messageLabel.text = text;
-        cell.messageLabel.font = font;
-        cell.messageLabel.numberOfLines = 0;
-        cell.messageLabel.baselineAdjustment = UIBaselineAdjustmentAlignBaselines; // or UIBaselineAdjustmentAlignCenters, or UIBaselineAdjustmentNone
-        cell.messageLabel.adjustsFontSizeToFitWidth = NO;
-        cell.messageLabel.clipsToBounds = YES;
-        cell.messageLabel.textColor = [UIColor whiteColor];
-        cell.messageLabel.textAlignment = NSTextAlignmentCenter;
-        [[cell.messageLabel layer] setCornerRadius:4];
-        
-        cell.timestampLabel.text = [BRDateHelper timeFromNow:message.timestamp];
-        [cell.timestampLabel sizeToFit];
-        return cell;
-    } else {
-        static NSString *cellIdentifier = @"myMessageCellIdentifier";
-        
-        
-        ConversationTheirTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-        if (cell == nil) {
-            cell = [[ConversationTheirTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault  reuseIdentifier:cellIdentifier];
-        }
-        
-        UIFont *font = [UIFont fontWithName:@"HelveticaNeue" size:10];
-        NSString *text = message.text;
-        
-        cell.messageLabel.backgroundColor = [UIColor greenColor];
-        
-        cell.messageLabel.text = text;
-        cell.messageLabel.font = font;
-        cell.messageLabel.numberOfLines = 0;
-        cell.messageLabel.baselineAdjustment = UIBaselineAdjustmentAlignBaselines; // or UIBaselineAdjustmentAlignCenters, or UIBaselineAdjustmentNone
-        cell.messageLabel.adjustsFontSizeToFitWidth = NO;
-        cell.messageLabel.clipsToBounds = YES;
-        cell.messageLabel.textColor = [UIColor whiteColor];
-        cell.messageLabel.textAlignment = NSTextAlignmentCenter;
-        [[cell.messageLabel layer] setCornerRadius:4];
-        
-        cell.timestampLabel.text = [BRDateHelper timeFromNow:message.timestamp];
-        [cell.timestampLabel sizeToFit];
-        return cell;
+-(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ChatMessage *message;
+    message = [self findMessageAtPath:indexPath];
+    NSString *cellIdentifier = @"theirMessageCellIdentifier";
+    BOOL mine = [message.channel isEqualToString:@"ID_0"];
+    if (mine) {
+        cellIdentifier = @"myMessageCellIdentifier";
     }
+    ConversationTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    NSAssert(cell != nil, @"Must use a known cell identifier (theirMessageCellIdentifier or myMessageCellIdentifier)");
+    [cell displayMessage:message];
+    return cell;
 }
 
 #pragma mark - UITableViewDelegate
@@ -227,18 +186,14 @@ CGFloat kbHeight = 0.0;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSArray *sortedArray;
-    sortedArray = [_conversation.messages.allObjects sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
-        NSDate *first = [(ChatMessage *)a timestamp];
-        NSDate *second = [(ChatMessage *)b timestamp];
-        return [first compare:second];
-    }];
+    ChatMessage *message;
+    message = [self findMessageAtPath:indexPath];
+    //TODO: get cell from tableview so that we aren't duplicating settings and so that the cell can tell us the height based on My or Theirs as Theirs needs extra height for avatar if message length is short
     
-    ChatMessage *message = sortedArray[indexPath.row];
-
-    UILabel *gettingSizeLabel = [[UILabel alloc] init];
+    InsetLabel *gettingSizeLabel = [[InsetLabel alloc] initWithTopInset:5.0 andLeft:10.0 andBottom:5.0 andRight:10.0];
     gettingSizeLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:10];
     gettingSizeLabel.numberOfLines = 0;
+    gettingSizeLabel.lineBreakMode = NSLineBreakByWordWrapping;
     gettingSizeLabel.baselineAdjustment = UIBaselineAdjustmentAlignBaselines;
     
     gettingSizeLabel.text = message.text;

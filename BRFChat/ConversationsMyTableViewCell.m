@@ -19,5 +19,10 @@
 
     // Configure the view for the selected state
 }
+- (void)displayMessage:(ChatMessage *)msg {
+    //TODO:Remove so that the storyboard setting controls
+    self.messageLabel.backgroundColor = [UIColor greenColor];
+    [super displayMessage:msg];
+}
 
 @end
