@@ -1,3 +1,8 @@
+Pods/**
+build/**
+.DS_Store
+BRFChat.xcodeproj/xcuserdata/**
+BRFChat.xcworkspace/xcuserdata/**
 Pods/PubNub/PubNub/Data/Service Objects/PNPresenceChannelHereNowResult.h
 Pods/PubNub/PubNub/Data/Service Objects/PNPresenceChannelHereNowResult.m
 Pods/PubNub/PubNub/Data/Service Objects/PNPresenceGlobalHereNowResult.h

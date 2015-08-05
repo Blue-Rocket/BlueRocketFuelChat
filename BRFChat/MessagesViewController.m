@@ -53,7 +53,7 @@
         Conversation *cv = [self fakeSomeConversation];
         for (int i=0;i<r;i++) {
             
-            NSString *msgText = [NSString stringWithFormat:@"This is the text of message %d.", i];
+            NSString *msgText = [NSString stringWithFormat:@"This is the extra, extra, extra, extra, extra, extra, extra, extra, extra, extra, extra, extra, extra, extra, extra, extra, extra, extra, extra, extra long text of message %d.", i];
             NSString *channel;
             if ((i % 2) == 0)
                 channel = [NSString stringWithFormat:@"ID_%d",r];
