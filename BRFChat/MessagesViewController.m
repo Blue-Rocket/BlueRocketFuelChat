@@ -29,6 +29,8 @@
 #import "ConversationsViewController.h"
 #import "BRDateHelper.h"
 #import "AppDelegate+BRChat.h"
+#import "Contact.h"
+#import "AddressBook.h"
 
 @interface MessagesViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -43,8 +45,100 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-
+    [self fakeSomeData];
     
+    // Retrieve conversations
+    NSManagedObjectContext *context = [appDelegate.coreData managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"Conversation" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    NSError *error;
+    _conversationList = [NSMutableArray arrayWithArray:[context executeFetchRequest:fetchRequest error:&error]];
+    
+    
+    
+    
+    // Retrieve contacts
+    entity = [NSEntityDescription entityForName:@"Contact" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    NSMutableArray *addr = [NSMutableArray arrayWithArray:[context executeFetchRequest:fetchRequest error:&error]];
+    
+    
+    for (Contact *c in addr)
+        NSLog(@"Name: %@\n",c.displayName);
+         
+         
+         return;
+    
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+ {
+     if ([[segue identifier] isEqualToString:@"conversationSegue"]) {
+         ConversationsViewController* viewController = [segue destinationViewController];
+         viewController.conversation = [_conversationList objectAtIndex:[self.tableView indexPathForSelectedRow].row];
+         viewController.msgChannel = @"my_channel";      //TEMP: We'll get this from the message that we clicked on to open the conversations view
+     }
+ }
+
+
+#pragma mark - TEMPORARY!!! Fake some messages and conversations
+- (ChatMessage *)fakeSomeMessageFrom:(NSString *)author onChannel:(NSString *)channel text:(NSString *)text
+{
+    NSManagedObjectContext *context = [appDelegate.coreData managedObjectContext];
+    ChatMessage *chatMsg = [NSEntityDescription
+                                       insertNewObjectForEntityForName:@"ChatMessage"
+                                       inManagedObjectContext:context];
+    [chatMsg setValue:author forKey:@"author"];
+    [chatMsg setValue:text forKey:@"text"];
+    [chatMsg setValue:channel forKey:@"channel"];
+    [chatMsg setValue:[NSDate date] forKey:@"timestamp"];
+    NSError *error;
+    if (![context save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    }
+    return chatMsg;
+}
+
+- (Conversation *)fakeSomeConversation
+{
+    NSManagedObjectContext *context = [appDelegate.coreData managedObjectContext];
+    Conversation *conv = [NSEntityDescription
+                            insertNewObjectForEntityForName:@"Conversation"
+                            inManagedObjectContext:context];
+    [conv setValue:@"Brian" forKey:@"author"];
+    NSError *error;
+    if (![context save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    }
+    return conv;
+}
+
+- (Contact *)fakeSomeContactForName:(NSString *)name withChatId:(NSString *)chatId
+{
+    NSManagedObjectContext *context = [appDelegate.coreData managedObjectContext];
+    Contact *contact = [NSEntityDescription
+                            insertNewObjectForEntityForName:@"Contact"
+                            inManagedObjectContext:context];
+    [contact setValue:name forKey:@"displayName"];
+    [contact setValue:chatId forKey:@"chatId"];
+    NSError *error;
+    if (![context save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    }
+    return contact;
+}
+
+
+- (void)fakeSomeData
+{
     /* TEMP: Add some test messages  *************************/
     NSMutableArray *conversations = [NSMutableArray arrayWithCapacity:0];
     
@@ -68,64 +162,54 @@
         [conversations addObject:cv];
     }
     /***********************************/
+    // Populate the address book just once
+    if ([[appDelegate.addrBook.contacts allObjects] count] > 19)
+        return;
     
-    // Retrieve conversations
-    NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription
-                                   entityForName:@"Conversation" inManagedObjectContext:context];
-    [fetchRequest setEntity:entity];
-    NSError *error;
-    _conversationList = [NSMutableArray arrayWithArray:[context executeFetchRequest:fetchRequest error:&error]];
+    Contact *c = [self fakeSomeContactForName:@"Albert" withChatId:[NSString stringWithFormat:@"1000"]];
+    [appDelegate.addrBook addContactsObject:c];
+    c = [self fakeSomeContactForName:@"Alice" withChatId:[NSString stringWithFormat:@"1001"]];
+    [appDelegate.addrBook addContactsObject:c];
+    c = [self fakeSomeContactForName:@"Herbert" withChatId:[NSString stringWithFormat:@"1002"]];
+    [appDelegate.addrBook addContactsObject:c];
+    c = [self fakeSomeContactForName:@"Lawrence" withChatId:[NSString stringWithFormat:@"1003"]];
+    [appDelegate.addrBook addContactsObject:c];
+    c = [self fakeSomeContactForName:@"Judy" withChatId:[NSString stringWithFormat:@"1004"]];
+    [appDelegate.addrBook addContactsObject:c];
+    c = [self fakeSomeContactForName:@"Maria" withChatId:[NSString stringWithFormat:@"1005"]];
+    [appDelegate.addrBook addContactsObject:c];
+    c = [self fakeSomeContactForName:@"Donna" withChatId:[NSString stringWithFormat:@"1006"]];
+    [appDelegate.addrBook addContactsObject:c];
+    c = [self fakeSomeContactForName:@"David" withChatId:[NSString stringWithFormat:@"1007"]];
+    [appDelegate.addrBook addContactsObject:c];
+    c = [self fakeSomeContactForName:@"Zak" withChatId:[NSString stringWithFormat:@"1008"]];
+    [appDelegate.addrBook addContactsObject:c];
+    c = [self fakeSomeContactForName:@"Shawn" withChatId:[NSString stringWithFormat:@"1009"]];
+    [appDelegate.addrBook addContactsObject:c];
+    c = [self fakeSomeContactForName:@"Jess" withChatId:[NSString stringWithFormat:@"1010"]];
+    [appDelegate.addrBook addContactsObject:c];
+    c = [self fakeSomeContactForName:@"Estevan" withChatId:[NSString stringWithFormat:@"1011"]];
+    [appDelegate.addrBook addContactsObject:c];
+    c = [self fakeSomeContactForName:@"Brian" withChatId:[NSString stringWithFormat:@"1012"]];
+    [appDelegate.addrBook addContactsObject:c];
+    c = [self fakeSomeContactForName:@"Xavier" withChatId:[NSString stringWithFormat:@"1013"]];
+    [appDelegate.addrBook addContactsObject:c];
+    c = [self fakeSomeContactForName:@"Victor" withChatId:[NSString stringWithFormat:@"1014"]];
+    [appDelegate.addrBook addContactsObject:c];
+    c = [self fakeSomeContactForName:@"Cathy" withChatId:[NSString stringWithFormat:@"1015"]];
+    [appDelegate.addrBook addContactsObject:c];
+    c = [self fakeSomeContactForName:@"Kevin" withChatId:[NSString stringWithFormat:@"1016"]];
+    [appDelegate.addrBook addContactsObject:c];
+    c = [self fakeSomeContactForName:@"Kyle" withChatId:[NSString stringWithFormat:@"1017"]];
+    [appDelegate.addrBook addContactsObject:c];
+    c = [self fakeSomeContactForName:@"Randall" withChatId:[NSString stringWithFormat:@"1018"]];
+    [appDelegate.addrBook addContactsObject:c];
+    c = [self fakeSomeContactForName:@"Betsy" withChatId:[NSString stringWithFormat:@"1019"]];
+    [appDelegate.addrBook addContactsObject:c];
+    c = [self fakeSomeContactForName:@"Jeff" withChatId:[NSString stringWithFormat:@"1020"]];
+    [appDelegate.addrBook addContactsObject:c];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - Navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
- {
-     if ([[segue identifier] isEqualToString:@"conversationSegue"]) {
-         ConversationsViewController* viewController = [segue destinationViewController];
-         viewController.conversation = [_conversationList objectAtIndex:[self.tableView indexPathForSelectedRow].row];
-         viewController.msgChannel = @"my_channel";      //TEMP: We'll get this from the message that we clicked on to open the conversations view
-     }
- }
-
-
-#pragma mark - TEMPORARY!!! Fake some messages and conversations
-- (ChatMessage *)fakeSomeMessageFrom:(NSString *)author onChannel:(NSString *)channel text:(NSString *)text
-{
-    NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    ChatMessage *chatMsg = [NSEntityDescription
-                                       insertNewObjectForEntityForName:@"ChatMessage"
-                                       inManagedObjectContext:context];
-    [chatMsg setValue:author forKey:@"author"];
-    [chatMsg setValue:text forKey:@"text"];
-    [chatMsg setValue:channel forKey:@"channel"];
-    [chatMsg setValue:[NSDate date] forKey:@"timestamp"];
-    NSError *error;
-    if (![context save:&error]) {
-        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
-    }
-    return chatMsg;
-}
-
-- (Conversation *)fakeSomeConversation
-{
-    NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    Conversation *conv = [NSEntityDescription
-                            insertNewObjectForEntityForName:@"Conversation"
-                            inManagedObjectContext:context];
-    [conv setValue:@"Brian" forKey:@"author"];
-    NSError *error;
-    if (![context save:&error]) {
-        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
-    }
-    return conv;
-}
 
 
 #pragma mark - UITableVewDataSource delegate

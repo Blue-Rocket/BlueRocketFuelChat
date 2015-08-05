@@ -26,6 +26,8 @@
 
 @implementation AppDelegate (BRChat)
 @dynamic BRChatClient;
+@dynamic coreData;
+@dynamic addrBook;
 
 
 -(void)setBRChatClient:(PubNub *)BRChatClient
@@ -36,6 +38,54 @@
 - (PubNub *)BRChatClient {
     return objc_getAssociatedObject(self, @selector(BRChatClient));
 }
+
+
+-(void)setCoreData:(PersistentStorageController *)coreData
+{
+    objc_setAssociatedObject(self, @selector(coreData), coreData, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (PersistentStorageController *)coreData {
+    if (!objc_getAssociatedObject(self, @selector(coreData))) {
+        self.coreData = [[PersistentStorageController alloc]init];
+    } else {
+        return objc_getAssociatedObject(self, @selector(coreData));
+    }
+    return self.coreData;
+}
+
+- (void)setAddrBook:(AddressBook *)addrBook
+{
+    objc_setAssociatedObject(self, @selector(addrBook), addrBook, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (AddressBook *)addrBook {
+    if (!objc_getAssociatedObject(self, @selector(addrBook))) {
+    
+        NSManagedObjectContext *context = [self.coreData managedObjectContext];
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription
+                                       entityForName:@"AddressBook" inManagedObjectContext:context];
+        [fetchRequest setEntity:entity];
+        NSError *error = nil;
+        NSMutableArray *addrBk = [NSMutableArray arrayWithArray:[context executeFetchRequest:fetchRequest error:&error]];
+        
+        if (!addrBk||[addrBk count] == 0) {
+            self.addrBook = [NSEntityDescription insertNewObjectForEntityForName:@"AddressBook" inManagedObjectContext:context];
+            NSError *error;
+            if (![context save:&error]) {
+                NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+            }
+        } else {
+            self.addrBook = [addrBk objectAtIndex:0];   // There should only be one address book
+        }
+    } else {
+        return objc_getAssociatedObject(self, @selector(addrBook));
+    }
+    return self.addrBook;
+}
+
+
 
 -(void) configureChat
 {

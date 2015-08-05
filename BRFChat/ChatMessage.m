@@ -2,7 +2,7 @@
 //  ChatMessage.m
 //  
 //
-//  Created by Brian A. Hill on 8/3/15.
+//  Created by Brian A. Hill on 8/4/15.
 //
 //
 
@@ -13,8 +13,8 @@
 @implementation ChatMessage
 
 @dynamic author;
-@dynamic text;
 @dynamic channel;
+@dynamic text;
 @dynamic timestamp;
 @dynamic conversation;
 
