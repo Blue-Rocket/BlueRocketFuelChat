@@ -56,21 +56,9 @@
     NSError *error;
     _conversationList = [NSMutableArray arrayWithArray:[context executeFetchRequest:fetchRequest error:&error]];
     
-    
-    
-    
-    // Retrieve contacts
-    entity = [NSEntityDescription entityForName:@"Contact" inManagedObjectContext:context];
-    [fetchRequest setEntity:entity];
-    NSMutableArray *addr = [NSMutableArray arrayWithArray:[context executeFetchRequest:fetchRequest error:&error]];
-    
-    
-    for (Contact *c in addr)
-        NSLog(@"Name: %@\n",c.displayName);
-         
-         
-         return;
-    
+    for (Conversation *c in _conversationList) {
+        NSLog(@"Conversation Messages: %lu", [c.messages count]);
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -245,7 +233,7 @@
     }];
     
     ChatMessage *msg = [sortedArray lastObject];
-    cell.nameLabel.text = msg.author;
+    cell.nameLabel.text = cv.author;
     
     cell.messageLabel.text = msg.text;
     

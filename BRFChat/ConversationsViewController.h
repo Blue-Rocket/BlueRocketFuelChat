@@ -26,7 +26,7 @@
 #import "BRChatClient.h"
 #import "Conversation.h"
 
-@interface ConversationsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource,PNObjectEventListener,UITextFieldDelegate>
+@interface ConversationsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate>
 
 @property (nonatomic,strong) Conversation *conversation;
 @property (nonatomic,strong) NSString *msgChannel;

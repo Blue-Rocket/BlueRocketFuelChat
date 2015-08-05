@@ -14,6 +14,7 @@
 @interface Conversation : NSManagedObject
 
 @property (nonatomic, retain) NSString * author;
+@property (nonatomic, retain) NSString * channel;
 @property (nonatomic, retain) NSDate * timestamp;
 @property (nonatomic, retain) NSSet *messages;
 @end

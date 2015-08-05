@@ -17,13 +17,14 @@
     </entity>
     <entity name="Conversation" representedClassName="Conversation" syncable="YES">
         <attribute name="author" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="channel" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="messages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ChatMessage" inverseName="conversation" inverseEntity="ChatMessage" syncable="YES"/>
     </entity>
     <elements>
-        <element name="ChatMessage" positionX="-63" positionY="-27" width="128" height="118"/>
-        <element name="Conversation" positionX="151" positionY="-126" width="128" height="88"/>
-        <element name="Contact" positionX="-864" positionY="-243" width="128" height="88"/>
         <element name="AddressBook" positionX="-351" positionY="-81" width="128" height="58"/>
+        <element name="ChatMessage" positionX="-63" positionY="-27" width="128" height="118"/>
+        <element name="Contact" positionX="-864" positionY="-243" width="128" height="88"/>
+        <element name="Conversation" positionX="151" positionY="-126" width="128" height="103"/>
     </elements>
 </model>

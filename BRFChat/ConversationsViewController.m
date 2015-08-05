@@ -59,83 +59,21 @@ CGFloat kbHeight = 0.0;
 
 - (void)initChat
 {
-    [appDelegate.BRChatClient addListener:self];
-    [appDelegate.BRChatClient subscribeToChannels:@[_msgChannel] withPresence:NO];
+    _msgChannel = @"my_channel";    //TEMP: Get this from conversation
+    [appDelegate.chatClientController subscribeToChatChannel:_msgChannel];
 }
 
 #pragma mark - PubNub Event Handlers
 
 - (IBAction)sendMessage:(id)sender {
 
-    [appDelegate.BRChatClient publish:_conversationTextField.text toChannel:_msgChannel withCompletion:^(PNPublishStatus *status){
-        // Check whether request successfully completed
-        if (!status.isError) {
-            // Success
-        } else {
-            // Failure: handle error.
-            // Check category property to find possible issue
-            //Request can be resent using [status retry];
-        }
-    }];
+    [appDelegate.chatClientController sendMessage:_conversationTextField.text onChannel:_msgChannel];
     _conversationTextField.text = @"";
 }
 
-- (void)client:(PubNub *)client didReceiveMessage:(PNMessageResult *)message {
-    if (message.data.actualChannel) {
-        // Message received on channel group stored in
-        // message.data.subscribedChannel
-    } else {
-        // Message received on channel stored in
-        // message.data.subscribedChannel
-        [self handleMessage:message];
-    }
-    NSLog(@"Received message: %@ on channel %@ at %@", message.data.message, message.data.subscribedChannel, message.data.timetoken);
-}
-
-- (void)client:(PubNub *)client didReceiveStatus:(PNSubscribeStatus *)status {
-    if (status.category == PNUnexpectedDisconnectCategory){
-        // Connectivity lost
-    } else if (status.category == PNConnectedCategory)  {
-        // Connected event. You can do stuff like publish and know you'll get it
-        // Or just use the conneceted event to confirm you are subscribed for
-        // UI / internal notifications, etc.
-        [appDelegate.BRChatClient publish:@"Hello from the PubNub SDK" toChannel:_msgChannel withCompletion:^(PNPublishStatus *status){
-            // Check whether request successfully completed
-            if (!status.isError) {
-                // Success
-            } else {
-                // Failure: handle error.
-                // Check category property to find possible issue
-                //Request can be resent using [status retry];
-            }
-        }];
-    } else if (status.category == PNReconnectedCategory) {
-        // Event occurs when radio / connectivity is lost then regained
-    } else if (status.category == PNDecryptionErrorCategory) {
-        // Decryption error.
-        // Probably client configured to encrypt messages and
-        // on live data feed it received plain text
-    }
-    
-}
 
 - (void)handleMessage:(PNMessageResult *)message
 {
-    NSManagedObjectContext *context = [appDelegate.coreData managedObjectContext];
-
-    ChatMessage *chatMsg = [NSEntityDescription
-                                insertNewObjectForEntityForName:@"ChatMessage"
-                                inManagedObjectContext:context];
-    [chatMsg setValue:@"Brian" forKey:@"author"];
-    [chatMsg setValue:message.data.message forKey:@"text"];
-    [chatMsg setValue:message.data.subscribedChannel forKey:@"channel"];
-    [chatMsg setValue:[NSDate dateWithTimeIntervalSince1970:(message.data.timetoken.longValue / 10000000)] forKey:@"timestamp"];
-    NSError *error;
-    if (![context save:&error]) {
-        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
-    }
-
-    [_conversation addMessagesObject:chatMsg];
 
     [self.tableView reloadData];
     

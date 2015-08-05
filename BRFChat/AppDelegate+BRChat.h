@@ -28,10 +28,11 @@
 #import "PersistentStorageController.h"
 #import <objc/runtime.h>
 #import "AddressBook.h"
+#import "BRChatClientController.h"
 
 
-@interface AppDelegate (BRChat) <PNObjectEventListener>
-@property (nonatomic) PubNub *BRChatClient;
+@interface AppDelegate (BRChat)
+@property (nonatomic,strong) BRChatClientController *chatClientController;
 @property (nonatomic,strong) PersistentStorageController *coreData;
 @property (nonatomic,strong) AddressBook *addrBook;
 

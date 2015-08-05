@@ -29,5 +29,4 @@
 #import <PubNub/PubNub.h>
 
 @interface BRChatClient : PubNub
-- (id)initWithConfiguration:(PNConfiguration  *)config;
 @end

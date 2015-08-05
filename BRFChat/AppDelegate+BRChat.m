@@ -25,18 +25,18 @@
 #import "AppDelegate+BRChat.h"
 
 @implementation AppDelegate (BRChat)
-@dynamic BRChatClient;
+@dynamic chatClientController;
 @dynamic coreData;
 @dynamic addrBook;
 
 
--(void)setBRChatClient:(PubNub *)BRChatClient
+-(void)setChatClientController:(BRChatClientController *)chatClientController
 {
-    objc_setAssociatedObject(self, @selector(BRChatClient), BRChatClient, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(chatClientController), chatClientController, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (PubNub *)BRChatClient {
-    return objc_getAssociatedObject(self, @selector(BRChatClient));
+- (BRChatClientController *)chatClientController {
+    return objc_getAssociatedObject(self, @selector(chatClientController));
 }
 
 
@@ -91,32 +91,7 @@
 {
     // PubNub configuration
     PNConfiguration *configuration = [PNConfiguration configurationWithPublishKey:@"demo" subscribeKey:@"demo"];
-    self.BRChatClient = [PubNub clientWithConfiguration:configuration];
-    
-    [self.BRChatClient timeWithCompletion:^(PNTimeResult *result, PNErrorStatus *status) {
-        // Check whether request successfully completed or not.
-        if (!status.isError) {
-            // Handle downloaded server time token using: result.data.timetoken
-            NSDate *date = [NSDate dateWithTimeIntervalSince1970:(result.data.timetoken.longValue / 10000000)];
-            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-            dateFormatter.timeStyle = NSDateFormatterShortStyle;
-            dateFormatter.dateStyle = NSDateFormatterMediumStyle;
-            
-            NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
-            [dateFormatter setLocale:usLocale];
-            NSString *timestamp = [dateFormatter stringFromDate:date];
-            NSLog(@"Server date/time: %@\n", timestamp);
-        }
-        // Request processing failed.
-        else {
-            
-            // Handle time token download error. Check 'category' property to find
-            // out possible issue because of which request did fail.
-            //
-            // Request can be resent using: [status retry];
-        }
-    }];
-    
+    self.chatClientController = [[BRChatClientController alloc] initWithConfiguration: configuration];
 }
 
 @end

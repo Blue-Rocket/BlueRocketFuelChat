@@ -13,6 +13,7 @@
 @implementation Conversation
 
 @dynamic author;
+@dynamic channel;
 @dynamic timestamp;
 @dynamic messages;
 

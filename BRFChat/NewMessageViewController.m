@@ -153,16 +153,7 @@ NSString *msgChannel;
 
 - (IBAction)sendMessage:(id)sender {
     
-    [appDelegate.BRChatClient publish:_messageTextView.text toChannel:msgChannel withCompletion:^(PNPublishStatus *status){
-        // Check whether request successfully completed
-        if (!status.isError) {
-            // Success
-        } else {
-            // Failure: handle error.
-            // Check category property to find possible issue
-            //Request can be resent using [status retry];
-        }
-    }];
+    [appDelegate.chatClientController sendMessage: _messageTextView.text onChannel:msgChannel];
     
     // Go back to messages view. Set it's channel to this one
 }
