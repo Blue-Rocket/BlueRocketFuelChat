@@ -9,12 +9,14 @@
 #import "NewMessageViewController.h"
 #import "AppDelegate+BRChat.h"
 #import "Contact.h"
+#import "BRChatClient.h"
 
 @interface NewMessageViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *messageTextView;
 @property (weak, nonatomic) IBOutlet UITextField *messageAddressTextField;
-@property (weak, nonatomic) IBOutlet UIButton *sendButton;
 @property (weak, nonatomic) IBOutlet UITableView *addrTable;
+- (IBAction)sendMessage:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *sendButton;
 
 @end
 
@@ -22,6 +24,8 @@
 
 NSInteger tableRows = 0;
 NSMutableArray *contactNames;
+NSString *msgChannel;
+
 
 
 - (void)viewDidLoad {
@@ -68,7 +72,7 @@ NSMutableArray *contactNames;
 
 - (void)keyboardWillShow:(NSNotification *)notif
 {
-    CGFloat kbHeight = [[[notif userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
+    CGFloat kbHeight = [[[notif userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height + 20;
     [self updateKeyboardConstraint:kbHeight animationDuration:0.25];
     NSLog(@"HEIGHT: %f", kbHeight);
 }
@@ -103,13 +107,13 @@ NSMutableArray *contactNames;
     tableRows = [sortedArray count];
 
     for (Contact *c in sortedArray) {
-        [contactNames addObject:c.displayName];
+        [contactNames addObject:c];
     }
     _addrTable.hidden = NO;
     [_addrTable reloadData];
 }
 
-#pragma - TableViewDataSource
+#pragma mark - UITableViewDataSource
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -119,8 +123,8 @@ NSMutableArray *contactNames;
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault  reuseIdentifier:cellIdentifier];
     }
-    
-    cell.textLabel.text = [contactNames objectAtIndex:indexPath.row];
+    Contact *c = [contactNames objectAtIndex:indexPath.row];
+    cell.textLabel.text = c.displayName;
     return cell;
 }
 
@@ -128,5 +132,40 @@ NSMutableArray *contactNames;
 {
     return tableRows;
 }
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    Contact *c = [contactNames objectAtIndex:indexPath.row];
+    _messageAddressTextField.text = c.displayName;
+    _addrTable.hidden = YES;
+//    [_messageTextView becomeFirstResponder];
+    
+    // Add delete recipient button -------------
+    
+    // Get ChatId from contact
+//    Contact *c = [contactNames objectAtIndex:indexPath.row];
+    msgChannel = c.chatId;
+
+}
+
+
+- (IBAction)sendMessage:(id)sender {
+    
+    [appDelegate.BRChatClient publish:_messageTextView.text toChannel:msgChannel withCompletion:^(PNPublishStatus *status){
+        // Check whether request successfully completed
+        if (!status.isError) {
+            // Success
+        } else {
+            // Failure: handle error.
+            // Check category property to find possible issue
+            //Request can be resent using [status retry];
+        }
+    }];
+    
+    // Go back to messages view. Set it's channel to this one
+}
+
 
 @end

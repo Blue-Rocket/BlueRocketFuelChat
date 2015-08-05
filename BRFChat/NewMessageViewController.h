@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <PubNub/PubNub.h>
 
-@interface NewMessageViewController : UIViewController <UITextFieldDelegate,UITextViewDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface NewMessageViewController : UIViewController <UITextFieldDelegate,UITextViewDelegate,UITableViewDataSource,UITableViewDelegate,PNObjectEventListener>
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstraint;
 
 @end
