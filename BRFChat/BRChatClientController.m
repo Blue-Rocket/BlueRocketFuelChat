@@ -10,7 +10,6 @@
 #import "BRChatClient.h"
 #import "AppDelegate+BRChat.h"
 #import "ChatMessage.h"
-#import "Conversation.h"
 #import "Contact.h"
 
 @interface BRChatClientController()
@@ -151,6 +150,7 @@
     NSError *error;
     if (![context save:&error]) {
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+        return;
     }
     
     Conversation * c = [self conversationForChannel:message.data.subscribedChannel];
@@ -159,6 +159,8 @@
     NSLog(@"Messages: %lu",[c.messages count]);
     if (![context save:&error]) {
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    } else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"willReloadData" object:self];
     }
 }
 
@@ -177,6 +179,7 @@
     NSError *error;
     if (![context save:&error]) {
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+        return;
     }
     Conversation * c = [self conversationForChannel:channel];
     [c addMessagesObject:chatMsg];
@@ -185,6 +188,8 @@
     NSLog(@"Messages: %lu",[c.messages count]);
     if (![context save:&error]) {
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    } else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"willReloadData" object:self];
     }
 }
 

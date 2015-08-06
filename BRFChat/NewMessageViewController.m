@@ -10,6 +10,7 @@
 #import "AppDelegate+BRChat.h"
 #import "Contact.h"
 #import "BRChatClient.h"
+#import "ConversationsViewController.h"
 
 @interface NewMessageViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *messageTextView;
@@ -155,6 +156,16 @@ NSString *msgChannel;
     [appDelegate.chatClientController sendMessage: _messageTextView.text onChannel:msgChannel];
     
     // Go back to messages view. Set it's channel to this one
+    // If the ConversationsViewController is on the view stack, pop to it.
+    // If not, push it.
+    ConversationsViewController *cvc = [self.storyboard instantiateViewControllerWithIdentifier:@"convVC"];
+    cvc.msgChannel = msgChannel;
+    cvc.conversation = [appDelegate.chatClientController conversationForChannel:msgChannel];
+    
+    NSLog(@"Messages: %lu  Channel: %@", [cvc.conversation.messages count],msgChannel);
+    
+    [self.navigationController pushViewController:cvc animated:YES];
+
 }
 
 

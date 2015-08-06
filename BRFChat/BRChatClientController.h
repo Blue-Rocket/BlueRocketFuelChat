@@ -8,11 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import <PubNub/PubNub.h>
+#import "Conversation.h"
 
 @interface BRChatClientController : NSObject <PNObjectEventListener>
 
 - (id)initWithConfiguration:(PNConfiguration *)config;
 - (void)sendMessage:(NSString *)msg onChannel:(NSString *)msgChannel;
 - (void)subscribeToChatChannel:(NSString *)channel;
+- (Conversation *)conversationForChannel:(NSString *)channel;
 
 @end

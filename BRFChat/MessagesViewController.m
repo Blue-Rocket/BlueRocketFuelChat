@@ -59,7 +59,6 @@
     if ([_conversationList count] == 0) // Go to new messages view
         [self performSegueWithIdentifier:@"newMessagesViewSegue" sender:self];
     
-    
     for (Conversation *c in _conversationList) {
         NSLog(@"Conversation Messages: %lu", [c.messages count]);
     }
@@ -179,9 +178,8 @@
         [appDelegate.addrBook addContactsObject:c];
     }
     
-    return;
-    /* TEMP: Add some test messages  *************************/
-    NSMutableArray *conversations = [NSMutableArray arrayWithCapacity:0];
+    /* TEMP: Add some test messages  ***********************
+     NSMutableArray *conversations = [NSMutableArray arrayWithCapacity:0];
     
     for (int j=0;j<10;j++) {
         int r = rand() % 19;
@@ -202,7 +200,7 @@
         }
         [conversations addObject:cv];
     }
-    /***********************************/
+    **********************************/
 }
 
 

@@ -49,6 +49,7 @@ CGFloat kbHeight = 0.0;
     // Do any additional setup after loading the view.
 
     [self registerForKeyboardNotifications];
+    [self registerForChatNotifications];
     [self initChat];
 }
 
@@ -60,7 +61,6 @@ CGFloat kbHeight = 0.0;
 - (void)initChat
 {
     _msgChannel = _conversation.channel;
- //   [appDelegate.chatClientController subscribeToChatChannel:_msgChannel];
 }
 
 #pragma mark - PubNub Event Handlers
@@ -72,8 +72,22 @@ CGFloat kbHeight = 0.0;
 }
 
 
-- (void)handleMessage:(PNMessageResult *)message
+- (void)willReloadData:(NSNotification *)notif
 {
+    
+    // Retrieve conversations
+    NSManagedObjectContext *context = [appDelegate.coreData managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"Conversation" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    NSError *error;
+    NSMutableArray *conversationList = [NSMutableArray arrayWithArray:[context executeFetchRequest:fetchRequest error:&error]];
+    
+    NSArray *filteredContacts = [conversationList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"channel == %@", _msgChannel]];
+    
+    _conversation = [filteredContacts objectAtIndex:0];
+    
     [self.tableView reloadData];
     [self scrollToBottomOfTableView];
 }
@@ -161,6 +175,16 @@ CGFloat kbHeight = 0.0;
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillBeHidden:)
                                                  name:UIKeyboardWillHideNotification object:nil];
+    
+}
+
+
+- (void)registerForChatNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(willReloadData:)
+                                                 name:@"willReloadData" object:nil];
+    
     
 }
 

@@ -149,7 +149,7 @@
         <!--Conversations View Controller-->
         <scene sceneID="kyf-j3-GW7">
             <objects>
-                <viewController id="tT2-5Y-Qks" customClass="ConversationsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="convVC" id="tT2-5Y-Qks" customClass="ConversationsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="442-IS-SCh"/>
                         <viewControllerLayoutGuide type="bottom" id="mDE-b6-k5O"/>
@@ -356,7 +356,7 @@
         <!--New Message View Controller-->
         <scene sceneID="5kM-iO-3HT">
             <objects>
-                <viewController id="rEn-xd-OFj" customClass="NewMessageViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="newMsgsVC" id="rEn-xd-OFj" customClass="NewMessageViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="omk-tX-ap5"/>
                         <viewControllerLayoutGuide type="bottom" id="LsD-8e-giE"/>
@@ -391,7 +391,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qz0-Wz-QMd">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qz0-Wz-QMd">
                                 <rect key="frame" x="33" y="151" width="534" height="268"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -401,7 +401,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <tableView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="fTz-Bc-dTe" userLabel="AddrTableView">
+                            <tableView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="fTz-Bc-dTe" userLabel="AddrTableView">
                                 <rect key="frame" x="33" y="151" width="534" height="268"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -412,7 +412,7 @@
                                     <outlet property="delegate" destination="rEn-xd-OFj" id="EkI-Gg-i4r"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3P6-Ox-qR4">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3P6-Ox-qR4">
                                 <rect key="frame" x="499" y="401" width="36" height="30"/>
                                 <state key="normal" title="Send">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
