@@ -143,7 +143,7 @@ NSString *msgChannel;
     _addrTable.hidden = YES;
 //    [_messageTextView becomeFirstResponder];
     
-    // Add delete recipient button -------------
+    // TODO: Add delete recipient button -------------
     
     // Get ChatId from contact
     msgChannel = c.chatId;
@@ -155,8 +155,16 @@ NSString *msgChannel;
     
     [appDelegate.chatClientController sendMessage: _messageTextView.text onChannel:msgChannel];
     
-    // Go back to messages view. Set it's channel to this one
     // If the ConversationsViewController is on the view stack, pop to it.
+    for (UIViewController *vc in self.navigationController.viewControllers) {
+        if ([vc isKindOfClass:[ConversationsViewController class]]) {
+            ConversationsViewController *cvc = (ConversationsViewController *)vc;
+            cvc.msgChannel = msgChannel;
+            cvc.conversation = [appDelegate.chatClientController conversationForChannel:msgChannel];
+            [self.navigationController popToViewController:cvc animated:YES];
+            return;
+        }
+    }
     // If not, push it.
     ConversationsViewController *cvc = [self.storyboard instantiateViewControllerWithIdentifier:@"convVC"];
     cvc.msgChannel = msgChannel;

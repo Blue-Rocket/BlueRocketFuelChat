@@ -125,7 +125,6 @@
     
 }
 
-
 // Add incoming message to conversation
 - (void)addMessageToConversation:(PNMessageResult *)message
 {
@@ -198,16 +197,13 @@
 - (Conversation *)conversationForChannel:(NSString *)channel
 {
     NSManagedObjectContext *context = [appDelegate.coreData managedObjectContext];
-    if (([_conversationList count] == 0)||(_conversationList == nil)) {
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription
-                                       entityForName:@"Conversation" inManagedObjectContext:context];
-        [fetchRequest setEntity:entity];
-        NSError *error;
-        _conversationList = [NSMutableArray arrayWithArray:[context executeFetchRequest:fetchRequest error:&error]];
-    }
-    
-    NSArray *cv =[_conversationList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"channel == %@", channel]];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"Conversation" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"channel == %@", channel]];
+    NSError *error;
+    NSArray *cv = [context executeFetchRequest:fetchRequest error:&error];
     
     Conversation *conv;
     if ([cv count] == 0) {    // No conversation on this channel, create one

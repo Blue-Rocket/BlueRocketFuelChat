@@ -74,19 +74,17 @@ CGFloat kbHeight = 0.0;
 
 - (void)willReloadData:(NSNotification *)notif
 {
-    
     // Retrieve conversations
     NSManagedObjectContext *context = [appDelegate.coreData managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription
                                    entityForName:@"Conversation" inManagedObjectContext:context];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"channel == %@", _msgChannel]];
     [fetchRequest setEntity:entity];
     NSError *error;
-    NSMutableArray *conversationList = [NSMutableArray arrayWithArray:[context executeFetchRequest:fetchRequest error:&error]];
+    NSArray *conversationList = [context executeFetchRequest:fetchRequest error:&error];
     
-    NSArray *filteredContacts = [conversationList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"channel == %@", _msgChannel]];
-    
-    _conversation = [filteredContacts objectAtIndex:0];
+    _conversation = [conversationList objectAtIndex:0];
     
     [self.tableView reloadData];
     [self scrollToBottomOfTableView];
@@ -109,6 +107,8 @@ CGFloat kbHeight = 0.0;
     }];
     
     ChatMessage *message = sortedArray[indexPath.row];
+    
+    NSLog(@"MESSAGE: %@",message.text);
     return message;
 }
 
@@ -131,7 +131,7 @@ CGFloat kbHeight = 0.0;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Go to new message view
+
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
