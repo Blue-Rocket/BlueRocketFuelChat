@@ -15,7 +15,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="6IS-IY-h5A" kind="relationship" relationship="rootViewController" id="JKS-q8-mf2"/>
+                        <segue destination="Mcb-c2-X9I" kind="relationship" relationship="rootViewController" id="Upm-1q-h73"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zfZ-tl-vIH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -69,7 +69,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lMd-te-bgv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="628" y="1253"/>
+            <point key="canvasLocation" x="1298" y="1176"/>
         </scene>
         <!--Messages-->
         <scene sceneID="bQn-cd-kbe">
@@ -190,12 +190,11 @@
                         <outlet property="tableView" destination="CvM-oG-iyd" id="gtp-5G-aAS"/>
                         <segue destination="tT2-5Y-Qks" kind="show" identifier="conversationSegue" id="pEg-2H-PUc"/>
                         <segue destination="rEn-xd-OFj" kind="push" identifier="newMessagesViewSegue" id="CrY-NP-1pH"/>
-                        <segue destination="b8h-B3-mvP" kind="push" identifier="AddressBookSegue" id="7a0-Sn-q7N"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aOK-cF-uuF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="666" y="503"/>
+            <point key="canvasLocation" x="1298" y="503"/>
         </scene>
         <!--{chat.conversation.title}-->
         <scene sceneID="kyf-j3-GW7">
@@ -402,7 +401,63 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eCc-RU-w0D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1310" y="503"/>
+            <point key="canvasLocation" x="1942" y="503"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="cYW-dy-dhy">
+            <objects>
+                <viewController id="Mcb-c2-X9I" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="QE9-cA-tjp"/>
+                        <viewControllerLayoutGuide type="bottom" id="iJc-eK-B1G"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6M4-Zo-sYa">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Ra-9Y-AJP">
+                                <rect key="frame" x="238" y="210" width="125" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="125" id="JvH-cW-WLw"/>
+                                </constraints>
+                                <state key="normal" title="Address Book">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="b8h-B3-mvP" kind="push" id="fUv-GF-9RA"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bqw-Ag-T0O">
+                                <rect key="frame" x="277" y="285" width="33" height="30"/>
+                                <state key="normal" title="Chat">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="6IS-IY-h5A" kind="push" id="D4s-Ce-RQQ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bqw-Ag-T0O" firstAttribute="leading" secondItem="6M4-Zo-sYa" secondAttribute="leading" constant="277" id="HQs-8s-hpj"/>
+                            <constraint firstItem="8Ra-9Y-AJP" firstAttribute="centerX" secondItem="bqw-Ag-T0O" secondAttribute="centerX" constant="7" id="Z2Z-YX-uxs"/>
+                            <constraint firstItem="8Ra-9Y-AJP" firstAttribute="centerY" secondItem="bqw-Ag-T0O" secondAttribute="centerY" constant="-75" id="cxn-Sk-Qst"/>
+                            <constraint firstItem="8Ra-9Y-AJP" firstAttribute="centerX" secondItem="6M4-Zo-sYa" secondAttribute="centerX" id="hnn-Vf-HJm"/>
+                            <constraint firstItem="8Ra-9Y-AJP" firstAttribute="top" secondItem="QE9-cA-tjp" secondAttribute="bottom" constant="146" id="oMF-4P-ciG"/>
+                            <constraint firstItem="bqw-Ag-T0O" firstAttribute="leading" secondItem="6M4-Zo-sYa" secondAttribute="leading" constant="277" id="y50-O8-SHh"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="HQs-8s-hpj"/>
+                                <exclude reference="y50-O8-SHh"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" id="aFG-zq-yKG"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JSL-0w-JcJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="633" y="503"/>
         </scene>
         <!--{chat.newmessage.title}-->
         <scene sceneID="5kM-iO-3HT">
@@ -530,7 +585,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bZO-Fm-JQP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2000" y="503"/>
+            <point key="canvasLocation" x="2632" y="503"/>
         </scene>
     </scenes>
     <resources>
@@ -538,6 +593,6 @@
         <image name="avatar_placeholder.png" width="80" height="80"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="JTW-6d-037"/>
+        <segue reference="yrj-tb-6Py"/>
     </inferredMetricsTieBreakers>
 </document>
