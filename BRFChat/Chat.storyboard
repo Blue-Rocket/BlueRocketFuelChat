@@ -20,7 +20,56 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zfZ-tl-vIH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-85" y="503"/>
+            <point key="canvasLocation" x="-41" y="503"/>
+        </scene>
+        <!--{addrbook.title}-->
+        <scene sceneID="cH7-4I-8Ca">
+            <objects>
+                <tableViewController storyboardIdentifier="addrBookVC" id="b8h-B3-mvP" customClass="AddressBookViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" pagingEnabled="YES" dataMode="prototypes" style="plain" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Aww-Bc-G4i">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AddressBookCellIdentifier" textLabel="2Vk-sz-7gP" detailTextLabel="cQS-Ii-xYb" imageView="xPW-2b-DG5" style="IBUITableViewCellStyleSubtitle" id="SFl-tQ-yUN" customClass="AddrBookTableViewCell">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SFl-tQ-yUN" id="2L3-iv-dtY">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2Vk-sz-7gP">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cQS-Ii-xYb">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="avatar_placeholder.png" id="xPW-2b-DG5">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </imageView>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="avatar" destination="xPW-2b-DG5" id="1QX-N7-Lea"/>
+                                    <outlet property="subTitle" destination="cQS-Ii-xYb" id="xmN-6x-C64"/>
+                                    <outlet property="title" destination="2Vk-sz-7gP" id="DUb-iY-VdR"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="b8h-B3-mvP" id="Wvv-wG-dSf"/>
+                            <outlet property="delegate" destination="b8h-B3-mvP" id="Q7T-J0-eKV"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="{addrbook.title}" id="AjZ-u0-C7A"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lMd-te-bgv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="628" y="1253"/>
         </scene>
         <!--Messages-->
         <scene sceneID="bQn-cd-kbe">
@@ -141,6 +190,7 @@
                         <outlet property="tableView" destination="CvM-oG-iyd" id="gtp-5G-aAS"/>
                         <segue destination="tT2-5Y-Qks" kind="show" identifier="conversationSegue" id="pEg-2H-PUc"/>
                         <segue destination="rEn-xd-OFj" kind="push" identifier="newMessagesViewSegue" id="CrY-NP-1pH"/>
+                        <segue destination="b8h-B3-mvP" kind="push" identifier="AddressBookSegue" id="7a0-Sn-q7N"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aOK-cF-uuF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -484,7 +534,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="avatar_placeholder" width="80" height="80"/>
+        <image name="avatar_placeholder" width="35" height="35"/>
         <image name="avatar_placeholder.png" width="80" height="80"/>
     </resources>
     <inferredMetricsTieBreakers>

@@ -267,7 +267,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self performSegueWithIdentifier:@"conversationSegue" sender:self];
+//    [self performSegueWithIdentifier:@"conversationSegue" sender:self]; @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    
+    [self performSegueWithIdentifier:@"AddressBookSegue" sender:self];
+    
+    
+    
 }
 
 

@@ -31,6 +31,8 @@
 		D3565DF01B6FD0E7008F62C0 /* MessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3565DEB1B6FD0E7008F62C0 /* MessagesViewController.m */; };
 		D3565DF21B6FD0F9008F62C0 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3565DF11B6FD0F9008F62C0 /* Chat.storyboard */; };
 		D3565DF41B6FD104008F62C0 /* avatar_placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3565DF31B6FD104008F62C0 /* avatar_placeholder@2x.png */; };
+		D3CB8C271B794382008C481A /* AddressBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3CB8C261B794382008C481A /* AddressBookViewController.m */; };
+		D3D334C01B79550300F5C811 /* AddrBookTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D334BF1B79550300F5C811 /* AddrBookTableViewCell.m */; };
 		D3F421111B72702C000771FE /* BRChatClientController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F421101B72702C000771FE /* BRChatClientController.m */; };
 		D3F8FA181B700445002C9D17 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3F8FA171B700445002C9D17 /* CoreData.framework */; };
 		D3F8FA1B1B7004AF002C9D17 /* BRFChat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D3F8FA191B7004AF002C9D17 /* BRFChat.xcdatamodeld */; };
@@ -95,6 +97,10 @@
 		D3565DEB1B6FD0E7008F62C0 /* MessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesViewController.m; sourceTree = "<group>"; };
 		D3565DF11B6FD0F9008F62C0 /* Chat.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
 		D3565DF31B6FD104008F62C0 /* avatar_placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "avatar_placeholder@2x.png"; sourceTree = "<group>"; };
+		D3CB8C251B794382008C481A /* AddressBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressBookViewController.h; sourceTree = "<group>"; };
+		D3CB8C261B794382008C481A /* AddressBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressBookViewController.m; sourceTree = "<group>"; };
+		D3D334BE1B79550300F5C811 /* AddrBookTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddrBookTableViewCell.h; sourceTree = "<group>"; };
+		D3D334BF1B79550300F5C811 /* AddrBookTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddrBookTableViewCell.m; sourceTree = "<group>"; };
 		D3F4210F1B72702C000771FE /* BRChatClientController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRChatClientController.h; sourceTree = "<group>"; };
 		D3F421101B72702C000771FE /* BRChatClientController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRChatClientController.m; sourceTree = "<group>"; };
 		D3F8FA171B700445002C9D17 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -239,6 +245,8 @@
 		D3565DE11B6FD0D6008F62C0 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				D3D334BE1B79550300F5C811 /* AddrBookTableViewCell.h */,
+				D3D334BF1B79550300F5C811 /* AddrBookTableViewCell.m */,
 				639028F91B71C69900A5EDED /* ConversationTableViewCell.h */,
 				639028FA1B71C69900A5EDED /* ConversationTableViewCell.m */,
 				D31DCB251B70444A006DA60A /* NewMessageViewController.h */,
@@ -255,6 +263,8 @@
 				D3565DEB1B6FD0E7008F62C0 /* MessagesViewController.m */,
 				635D42711B71AEFC0042672E /* InsetLabel.h */,
 				635D42721B71AEFC0042672E /* InsetLabel.m */,
+				D3CB8C251B794382008C481A /* AddressBookViewController.h */,
+				D3CB8C261B794382008C481A /* AddressBookViewController.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -429,9 +439,11 @@
 				D3565DB01B6FD07A008F62C0 /* main.m in Sources */,
 				D3F8FA1B1B7004AF002C9D17 /* BRFChat.xcdatamodeld in Sources */,
 				D34EEFD51B71256200D65A65 /* PersistentStorageController.m in Sources */,
+				D3D334C01B79550300F5C811 /* AddrBookTableViewCell.m in Sources */,
 				D34EEFDA1B71336F00D65A65 /* ChatMessage.m in Sources */,
 				D3565DED1B6FD0E7008F62C0 /* ConversationsMyTableViewCell.m in Sources */,
 				D3565DDE1B6FD0D0008F62C0 /* BRChatClient.m in Sources */,
+				D3CB8C271B794382008C481A /* AddressBookViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
