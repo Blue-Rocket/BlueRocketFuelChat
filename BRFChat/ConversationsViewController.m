@@ -183,7 +183,7 @@ CGFloat kbHeight = 0.0;
 {
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(willReloadData:)
-                                                 name:@"willReloadData" object:nil];
+                                                 name:@"BRNewChatMessageNotification" object:nil];
     
     
 }

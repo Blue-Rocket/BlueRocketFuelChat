@@ -45,19 +45,16 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self fakeSomeData];
+    [self fakeSomeData];        //TODO: Temporary
     
-    // Retrieve conversations
-    NSManagedObjectContext *context = [appDelegate.coreData managedObjectContext];
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription
-                                   entityForName:@"Conversation" inManagedObjectContext:context];
-    [fetchRequest setEntity:entity];
-    NSError *error;
-    _conversationList = [NSMutableArray arrayWithArray:[context executeFetchRequest:fetchRequest error:&error]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadData) name:@"BRNewChatMessageNotification" object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     
-    if ([_conversationList count] == 0) // Go to new messages view
-        [self performSegueWithIdentifier:@"newMessagesViewSegue" sender:self];
+    [self loadData];
     
     for (Conversation *c in _conversationList) {
         NSLog(@"Conversation Messages: %lu", [c.messages count]);
@@ -203,6 +200,22 @@
     **********************************/
 }
 
+- (void)loadData
+{
+    // Retrieve conversations
+    NSManagedObjectContext *context = [appDelegate.coreData managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"Conversation" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    NSError *error;
+    _conversationList = [NSMutableArray arrayWithArray:[context executeFetchRequest:fetchRequest error:&error]];
+    
+    if ([_conversationList count] == 0) // Go to new messages view
+        [self performSegueWithIdentifier:@"newMessagesViewSegue" sender:self];
+    else
+        [_tableView reloadData];
+}
 
 
 #pragma mark - UITableVewDataSource delegate

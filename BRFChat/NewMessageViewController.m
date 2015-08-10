@@ -27,14 +27,19 @@ NSInteger tableRows = 0;
 NSMutableArray *contactNames;
 NSString *msgChannel;
 
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self registerForNotifications];
     contactNames = [[NSMutableArray alloc] initWithCapacity:0];
     _addrTable.hidden = YES;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    _messageAddressTextField.text = @"";
+    _messageTextView.text = @"";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -169,11 +174,7 @@ NSString *msgChannel;
     ConversationsViewController *cvc = [self.storyboard instantiateViewControllerWithIdentifier:@"convVC"];
     cvc.msgChannel = msgChannel;
     cvc.conversation = [appDelegate.chatClientController conversationForChannel:msgChannel];
-    
-    NSLog(@"Messages: %lu  Channel: %@", [cvc.conversation.messages count],msgChannel);
-    
     [self.navigationController pushViewController:cvc animated:YES];
-
 }
 
 

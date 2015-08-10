@@ -159,7 +159,7 @@
     if (![context save:&error]) {
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
     } else {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"willReloadData" object:self];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"BRNewChatMessageNotification" object:self];
     }
 }
 
@@ -188,7 +188,7 @@
     if (![context save:&error]) {
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
     } else {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"willReloadData" object:self];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"BRNewChatMessageNotification" object:self];
     }
 }
 
