@@ -38,7 +38,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="628"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MessagesTableViewCellIdentifier" id="DEO-DE-yPh" customClass="MessagesTableViewCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MessagesTableViewCellIdentifier" id="DEO-DE-yPh" customClass="MessagesTableViewCell">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" tableViewCell="DEO-DE-yPh" id="x1r-vC-BRU">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -50,22 +50,16 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d9w-GI-sO6">
-                                                    <rect key="frame" x="40" y="8" width="93" height="21"/>
+                                                    <rect key="frame" x="40" y="8" width="502" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="nWr-ge-1uj"/>
-                                                        <constraint firstAttribute="width" constant="413" id="rq8-LX-m5i"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="default">
-                                                        <mask key="constraints">
-                                                            <exclude reference="rq8-LX-m5i"/>
-                                                        </mask>
-                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message text" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SYQ-gY-C65">
-                                                    <rect key="frame" x="40" y="29" width="93" height="6"/>
+                                                    <rect key="frame" x="40" y="29" width="502" height="6"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="8"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -88,7 +82,9 @@
                                             <constraints>
                                                 <constraint firstAttribute="centerY" secondItem="iB9-GU-wV3" secondAttribute="centerY" id="9DE-IQ-qq0"/>
                                                 <constraint firstItem="iB9-GU-wV3" firstAttribute="top" secondItem="x1r-vC-BRU" secondAttribute="topMargin" id="9ZH-F5-iav"/>
+                                                <constraint firstItem="5ja-WU-jPs" firstAttribute="leading" secondItem="d9w-GI-sO6" secondAttribute="trailing" constant="50" id="9ux-Jz-4YW"/>
                                                 <constraint firstItem="SYQ-gY-C65" firstAttribute="leading" secondItem="iB9-GU-wV3" secondAttribute="trailing" constant="5" id="BFY-m2-PFz"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="SYQ-gY-C65" secondAttribute="trailing" constant="50" id="BeS-mM-Fok"/>
                                                 <constraint firstItem="d9w-GI-sO6" firstAttribute="top" secondItem="iB9-GU-wV3" secondAttribute="top" id="DQO-fu-hpS"/>
                                                 <constraint firstItem="iB9-GU-wV3" firstAttribute="leading" secondItem="x1r-vC-BRU" secondAttribute="leadingMargin" id="DRt-dr-MqB"/>
                                                 <constraint firstItem="SYQ-gY-C65" firstAttribute="bottom" secondItem="iB9-GU-wV3" secondAttribute="bottom" id="HxB-zA-C9b"/>
@@ -98,6 +94,11 @@
                                                 <constraint firstItem="SYQ-gY-C65" firstAttribute="top" secondItem="d9w-GI-sO6" secondAttribute="bottom" id="riM-Ko-GIY"/>
                                                 <constraint firstAttribute="centerY" secondItem="5ja-WU-jPs" secondAttribute="centerY" id="uqZ-yV-LfM"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="9ux-Jz-4YW"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="messageLabel" destination="SYQ-gY-C65" id="ila-vo-CO4"/>
@@ -121,7 +122,7 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="NNK-SH-6tO">
+                    <navigationItem key="navigationItem" title="{chat.messages.title}" id="NNK-SH-6tO">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="qk3-ze-Off">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" id="f3I-ra-os7">
                                 <rect key="frame" x="451" y="7" width="22" height="22"/>
@@ -146,7 +147,7 @@
             </objects>
             <point key="canvasLocation" x="666" y="503"/>
         </scene>
-        <!--Conversations View Controller-->
+        <!--{chat.conversation.title}-->
         <scene sceneID="kyf-j3-GW7">
             <objects>
                 <viewController storyboardIdentifier="convVC" id="tT2-5Y-Qks" customClass="ConversationsViewController" sceneMemberID="viewController">
@@ -158,10 +159,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mYq-NJ-eWN">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mYq-NJ-eWN">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="wpa-Ls-UNk">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="wpa-Ls-UNk">
                                         <rect key="frame" x="0.0" y="8" width="600" height="529"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
@@ -289,7 +290,7 @@
                                             <outlet property="delegate" destination="tT2-5Y-Qks" id="aTW-Vg-L7M"/>
                                         </connections>
                                     </tableView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" clearsOnBeginEditing="YES" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="kBc-Oj-EVh">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" clearsOnBeginEditing="YES" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="kBc-Oj-EVh">
                                         <rect key="frame" x="0.0" y="545" width="600" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
@@ -319,12 +320,12 @@
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="mYq-NJ-eWN" secondAttribute="trailing" constant="-16" id="94a-Mj-rUg"/>
                             <constraint firstItem="mYq-NJ-eWN" firstAttribute="leading" secondItem="5eq-d2-cF6" secondAttribute="leadingMargin" constant="-16" id="Igs-n0-CwZ"/>
-                            <constraint firstItem="mDE-b6-k5O" firstAttribute="top" secondItem="kBc-Oj-EVh" secondAttribute="bottom" constant="25" id="Wul-cO-7F9"/>
-                            <constraint firstItem="mDE-b6-k5O" firstAttribute="top" secondItem="mYq-NJ-eWN" secondAttribute="bottom" id="ftB-Pg-vG2"/>
+                            <constraint firstItem="mDE-b6-k5O" firstAttribute="top" secondItem="kBc-Oj-EVh" secondAttribute="bottom" constant="-19" id="Wul-cO-7F9"/>
+                            <constraint firstItem="mDE-b6-k5O" firstAttribute="top" secondItem="mYq-NJ-eWN" secondAttribute="bottom" constant="-44" id="ftB-Pg-vG2"/>
                             <constraint firstItem="mYq-NJ-eWN" firstAttribute="top" secondItem="442-IS-SCh" secondAttribute="bottom" constant="-64" id="vGl-E3-19C"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="pDw-Uz-bA4">
+                    <navigationItem key="navigationItem" title="{chat.conversation.title}" id="pDw-Uz-bA4">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="vCu-9h-Oij">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" id="2Zs-yf-oLi">
                                 <rect key="frame" x="451" y="7" width="22" height="22"/>
@@ -353,7 +354,7 @@
             </objects>
             <point key="canvasLocation" x="1310" y="503"/>
         </scene>
-        <!--New Message View Controller-->
+        <!--{chat.newmessage.title}-->
         <scene sceneID="5kM-iO-3HT">
             <objects>
                 <viewController storyboardIdentifier="newMsgsVC" id="rEn-xd-OFj" customClass="NewMessageViewController" sceneMemberID="viewController">
@@ -365,7 +366,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To:  -" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="90b-uF-X5C">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="{chat.newmessage.to}" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="90b-uF-X5C">
                                 <rect key="frame" x="33" y="68" width="534" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="6x6-Cn-eVr"/>
@@ -382,7 +383,7 @@
                                 <attributedString key="attributedText"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message: -" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wv9-ki-1lc">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="{chat.newmessage.message}" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wv9-ki-1lc">
                                 <rect key="frame" x="33" y="130" width="534" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="ydb-fb-mcl"/>
@@ -391,7 +392,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qz0-Wz-QMd">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qz0-Wz-QMd">
                                 <rect key="frame" x="33" y="151" width="534" height="268"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -401,7 +402,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <tableView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="fTz-Bc-dTe" userLabel="AddrTableView">
+                            <tableView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="fTz-Bc-dTe" userLabel="AddrTableView">
                                 <rect key="frame" x="33" y="151" width="534" height="268"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -412,9 +413,9 @@
                                     <outlet property="delegate" destination="rEn-xd-OFj" id="EkI-Gg-i4r"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3P6-Ox-qR4">
-                                <rect key="frame" x="499" y="401" width="36" height="30"/>
-                                <state key="normal" title="Send">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3P6-Ox-qR4">
+                                <rect key="frame" x="442" y="401" width="93" height="30"/>
+                                <state key="normal" title="{button.send}">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -427,7 +428,7 @@
                             <constraint firstItem="fTz-Bc-dTe" firstAttribute="trailing" secondItem="Qz0-Wz-QMd" secondAttribute="trailing" id="0Sg-zm-5dI"/>
                             <constraint firstItem="fTz-Bc-dTe" firstAttribute="bottom" secondItem="Qz0-Wz-QMd" secondAttribute="bottom" id="2vz-SX-ujN"/>
                             <constraint firstItem="Qz0-Wz-QMd" firstAttribute="top" secondItem="Wv9-ki-1lc" secondAttribute="bottom" constant="-1" id="3fQ-dy-G4a"/>
-                            <constraint firstItem="LsD-8e-giE" firstAttribute="top" secondItem="3P6-Ox-qR4" secondAttribute="bottom" constant="169" id="6nT-zh-HKB"/>
+                            <constraint firstItem="LsD-8e-giE" firstAttribute="top" secondItem="3P6-Ox-qR4" secondAttribute="bottom" constant="125" id="6nT-zh-HKB"/>
                             <constraint firstItem="90b-uF-X5C" firstAttribute="top" secondItem="omk-tX-ap5" secondAttribute="bottom" constant="4" id="74V-Vw-gRc"/>
                             <constraint firstItem="90b-uF-X5C" firstAttribute="centerX" secondItem="ts2-lt-Fsq" secondAttribute="centerX" id="8r7-k4-Uh0"/>
                             <constraint firstItem="Wv9-ki-1lc" firstAttribute="width" secondItem="90b-uF-X5C" secondAttribute="width" id="DRR-nh-YaS"/>
@@ -468,7 +469,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="5wu-ee-Cnd"/>
+                    <navigationItem key="navigationItem" title="{chat.newmessage.title}" id="5wu-ee-Cnd"/>
                     <connections>
                         <outlet property="addrTable" destination="fTz-Bc-dTe" id="0Ur-KC-aBk"/>
                         <outlet property="bottomConstraint" destination="6nT-zh-HKB" id="faR-qd-xAi"/>
@@ -487,6 +488,6 @@
         <image name="avatar_placeholder.png" width="80" height="80"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="yrj-tb-6Py"/>
+        <segue reference="JTW-6d-037"/>
     </inferredMetricsTieBreakers>
 </document>
