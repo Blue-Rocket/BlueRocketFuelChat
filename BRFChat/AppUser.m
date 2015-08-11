@@ -1,5 +1,5 @@
 //
-//  Created by Shawn McKee on 1/15/15.
+//  Created by Shawn McKee on 1/27/15.
 //
 //  Copyright (c) 2015 Blue Rocket, Inc. All rights reserved.
 //
@@ -22,14 +22,19 @@
 //  THE SOFTWARE.
 //
 
-#import <BlueRocketFuelCore/BlueRocketFuelCore.h>
+#import "AppUser.h"
 
-#define appDelegate ((AppDelegate *)[[UIApplication sharedApplication] delegate])
+@implementation AppUser
 
-@interface AppDelegate : BRAppDelegate <UIApplicationDelegate>
 
-@property (strong, nonatomic) UIWindow *window;
+// What is this class, you ask?
+
+// This is a shell implementation of the BRAppUser class, the class that is used as a singleton to model the data of the current user of the app.
+// The BRAppUser singleton is used throughout the Blue Rocket Fuel starter app for managing login and profile data.
+
+// An instance of this class will be instantiated for the user model on app startup if this class is included with the app, allowing you to
+// extend and provide custom functionality and data here for your own app user as needed.
+
 
 
 @end
-
