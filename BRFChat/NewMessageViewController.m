@@ -5,6 +5,24 @@
 //  Created by Brian A. Hill on 8/3/15.
 //  Copyright (c) 2015 Blue Rocket. All rights reserved.
 //
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
+//
 
 #import "NewMessageViewController.h"
 #import "AppDelegate+BRChat.h"
@@ -65,11 +83,11 @@ NSString *msgChannel;
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
                                                  name:UIKeyboardDidShowNotification object:nil];
-    
+
     [[NSNotificationCenter defaultCenter] addObserver:self
                                             selector:@selector(addressTextDidChange:)
                                             name:UITextFieldTextDidChangeNotification object:nil];
-    
+
 }
 
 - (void)updateKeyboardConstraint:(CGFloat)height animationDuration:(NSTimeInterval)duration {
@@ -91,15 +109,15 @@ NSString *msgChannel;
 - (void)addressTextDidChange:(NSNotification *)notif
 {
     NSString *text = [(UITextField *)notif.object text];
-    
+
     [self lookUpInAddressBook:text];
 }
 
 - (void)lookUpInAddressBook:(NSString *)text
 {
-    
+
     NSArray *allContacts = [appDelegate.addrBook.contacts allObjects];
-    
+
     NSArray *filteredContacts = [allContacts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"displayName BEGINSWITH [cd] %@", text]];
 
     NSArray *sortedArray;
@@ -108,7 +126,7 @@ NSString *msgChannel;
         NSString *second =  [(Contact *)b displayName];
         return [first compare:second];
     }];
-    
+
     [contactNames removeAllObjects];
     tableRows = [sortedArray count];
 
@@ -124,7 +142,7 @@ NSString *msgChannel;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"newMessageAddrCell";
-    
+
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault  reuseIdentifier:cellIdentifier];
@@ -147,9 +165,9 @@ NSString *msgChannel;
     _messageAddressTextField.text = c.displayName;
     _addrTable.hidden = YES;
 //    [_messageTextView becomeFirstResponder];
-    
+
     // TODO: Add delete recipient button -------------
-    
+
     // Get ChatId from contact
     msgChannel = c.chatId;
 
@@ -157,9 +175,9 @@ NSString *msgChannel;
 
 
 - (IBAction)sendMessage:(id)sender {
-    
+
     [appDelegate.chatClientController sendMessage: _messageTextView.text onChannel:msgChannel];
-    
+
     // If the ConversationsViewController is on the view stack, pop to it.
     for (UIViewController *vc in self.navigationController.viewControllers) {
         if ([vc isKindOfClass:[ConversationsViewController class]]) {

@@ -5,6 +5,24 @@
 //  Created by Brian A. Hill on 8/5/15.
 //  Copyright (c) 2015 Blue Rocket. All rights reserved.
 //
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
+//
 
 #import "BRChatClientController.h"
 #import "BRChatClient.h"
@@ -35,7 +53,7 @@
                 NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
                 dateFormatter.timeStyle = NSDateFormatterShortStyle;
                 dateFormatter.dateStyle = NSDateFormatterMediumStyle;
-                
+
                 NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
                 [dateFormatter setLocale:usLocale];
                 NSString *timestamp = [dateFormatter stringFromDate:date];
@@ -43,14 +61,14 @@
             }
             // Request processing failed.
             else {
-                
+
                 // Handle time token download error. Check 'category' property to find
                 // out possible issue because of which request did fail.
                 //
                 // Request can be resent using: [status retry];
             }
         }];
-         
+
         return self;
     }
     return nil;
@@ -69,9 +87,9 @@
 
 - (void)sendMessage:(NSString *)msg onChannel:(NSString *)msgChannel
 {
-    
+
     NSString *d = [NSString stringWithFormat: @"{ \"text\" : \"%@\" , \"channel\" :  \"%@\" }",msg, msgChannel];
-    
+
     [_client publish:d toChannel: msgChannel withCompletion:^(PNPublishStatus *status){
         // Check whether request successfully completed
         if (!status.isError) {
@@ -122,18 +140,18 @@
         // Probably client configured to encrypt messages and
         // on live data feed it received plain text
     }
-    
+
 }
 
 // Add incoming message to conversation
 - (void)addMessageToConversation:(PNMessageResult *)message
 {
     NSManagedObjectContext *context = [appDelegate.coreData managedObjectContext];
-    
+
     ChatMessage *chatMsg = [NSEntityDescription
                             insertNewObjectForEntityForName:@"ChatMessage"
                             inManagedObjectContext:context];
-    
+
     if ([message.data.message isKindOfClass:[NSString class]]) {
         [chatMsg setValue:message.data.message forKey:@"text"];
         [chatMsg setValue:message.data.subscribedChannel forKey:@"channel"];
@@ -151,7 +169,7 @@
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
         return;
     }
-    
+
     Conversation * c = [self conversationForChannel:message.data.subscribedChannel];
     [c addMessagesObject:chatMsg];
     [c setValue:[NSDate date] forKey: @"timestamp"];
@@ -167,7 +185,7 @@
 - (void)addMessageToConversation:(NSString *)msg onChannel:(NSString *)channel author:(NSString *)author
 {
     NSManagedObjectContext *context = [appDelegate.coreData managedObjectContext];
-    
+
     ChatMessage *chatMsg = [NSEntityDescription
                             insertNewObjectForEntityForName:@"ChatMessage"
                             inManagedObjectContext:context];
@@ -183,7 +201,7 @@
     Conversation * c = [self conversationForChannel:channel];
     [c addMessagesObject:chatMsg];
     [c setValue:[NSDate date] forKey: @"timestamp"];
-    
+
     NSLog(@"Messages: %lu",[c.messages count]);
     if (![context save:&error]) {
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
@@ -204,7 +222,7 @@
     [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"channel == %@", channel]];
     NSError *error;
     NSArray *cv = [context executeFetchRequest:fetchRequest error:&error];
-    
+
     Conversation *conv;
     if ([cv count] == 0) {    // No conversation on this channel, create one
         conv = [NSEntityDescription
@@ -229,7 +247,7 @@
 {
     NSArray *allContacts = [appDelegate.addrBook.contacts allObjects];
     NSArray *filteredContacts = [allContacts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"chatId == %@", chatId]];
-    
+
     if ([filteredContacts count] > 0){
         Contact *c = [filteredContacts objectAtIndex:0];
         return c.displayName;
